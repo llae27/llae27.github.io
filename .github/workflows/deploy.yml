@@ -21,6 +21,11 @@ jobs:
 
       - run: npm install
       - run: npm run build   # outputs to dist/
+        env:
+          ORCID_ID: ${{ vars.ORCID_ID }}
+          ORCID_CLIENT_ID: ${{ vars.ORCID_CLIENT_ID }}
+          ORCID_CLIENT_SECRET: ${{ secrets.ORCID_CLIENT_SECRET }}
+          ORCID_API_URL: ${{ vars.ORCID_API_URL }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
