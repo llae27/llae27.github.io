@@ -1,23 +1,37 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PubItem from '../components/PubItem.astro';
+import EduItem from '../components/EduItem.astro';
 
 const title = "Home";
 ---
-
 <BaseLayout title={title}>
   <section id="about" class="py-10">
     <h1 class="text-4xl font-extrabold mb-4">
       Researcher at University X
     </h1>
-    <p class="text-lg text-slate-700">
+    <p class="text-lg text-zinc-700">
       I work on <strong>Machine Learning</strong> and <strong>Computational Linguistics</strong>.
       Currently exploring how LLMs interact with Pug templates in 2026.
     </p>
   </section>
 
+  <section id="education" class="py-10">
+    <h2 class="text-2xl font-bold border-b-2 border-zinc-200 mb-6">
+    Education
+    </h2>
+    <EduItem
+      school="University of California, Riverside"
+      address="Riverside, California"
+      admitDate="2024-09-20"
+      gradDate="Current"
+      program="Doctor of Philosophy in Computer Science"
+      dept="Department of Computer Science and Engineering"
+    />
+  </section>
+
   <section id="publications" class="mt-12">
-    <h2 class="text-2xl font-bold border-b-2 border-slate-200 mb-6">
+    <h2 class="text-2xl font-bold border-b-2 border-zinc-200 mb-6">
       Publications
     </h2>
 

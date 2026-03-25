@@ -4,11 +4,11 @@ const { title, authors, venue, year, link = "#" } = Astro.props;
 
 <div class="mb-6 group">
   <a href={link} class="block">
-    <h3 class="text-lg font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+    <h3 class="text-lg font-semibold text-zinc-800 group-hover:text-blue-600 transition-colors">
       {title}
     </h3>
-    <p class="text-slate-600 text-sm">{authors}</p>
-    <p class="text-slate-500 text-sm italic">
+    <p class="text-zinc-600 text-sm">{authors}</p>
+    <p class="text-zinc-500 text-sm italic">
       {venue}, {year}
     </p>
   </a>
