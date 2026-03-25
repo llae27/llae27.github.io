@@ -1,4 +1,6 @@
 ---
+import PubItem from '../components/PubItem.astro';
+
 const orcidId = import.meta.env.ORCID_ID;
 const clientId = import.meta.env.ORCID_CLIENT_ID;
 const clientSecret = import.meta.env.ORCID_CLIENT_SECRET;
@@ -25,19 +27,82 @@ const worksResponse = await fetch(`${apiUrl}/${orcidId}/works`, {
     'Accept': 'application/json'
   }
 });
-
 const rawData = await worksResponse.json();
 
 // 3. Clean the data (ORCID returns a "group" of works)
-const publications = rawData.group.map((group) => {
-  const work = group['work-summary'][0];
-  console.log(work);
-  return {
-    title: work.title.title.value,
-    year: work['publication-date']?.year?.value || 'N/A',
-    journal: work['journal-title']?.value || 'Conference/Journal not specified',
-    type: work.type.replace(/-/g, ' '),
-    url: work['external-ids']?.['external-identifier']?.[0]?.['external-identifier-url']?.value || '#'
-  };
-}).sort((a, b) => b.year - a.year); // Sort by newest first
+const publications = await Promise.all(
+  rawData.group.map(async (group) => {
+    const work = group['work-summary'][0];
+    if (!work) return null;
+
+    // get authors
+    const putCode = work['put-code'];
+    const detailRes = await fetch(`${apiUrl}/${orcidId}/work/${putCode}`, {
+      headers: { 'Authorization': `Bearer ${access_token}`, 'Accept': 'application/json' }
+    });
+    const detail = await detailRes.json();
+    const contributors = detail['contributors']['contributor'] || [];
+    const authorList = contributors.map((c, index) => {
+      const name = c['credit-name']?.value;
+      const isFirst = c['contributor-attributes']?.['contributor-sequence'] === 'first';
+      const isYou = name === "Yourae Shin" || name === "Shin Y" ; // Replace with your actual name
+      // style
+      let displayName = name;
+      if (isFirst) displayName = `${displayName}*`;
+      if (isYou) displayName = `<strong>${displayName}</strong>`;
+
+      return displayName;
+    }).filter(Boolean).join(', ');
+
+    // get links
+    const externalIds = work['external-ids']?.['external-id'] || [];
+    const reducedIds = externalIds.reduce((acc, id) => {
+      const type = id['external-id-type'];
+      const value = id['external-id-value'];
+      const url = id['external-id-url']?.value;
+      
+      // We store the value and the URL for each ID type
+      acc[type] = { value, url };
+      return acc;
+    }, {});
+    const primaryUrl = reducedIds.doi?.url || reducedIds.arxiv?.url || externalIds[0]?.['external-id-url']?.value || "#";
+
+    return {
+      title: work.title.title.value,
+      authors: authorList || "Authors not listed",
+      year: work['publication-date']?.year?.value || 'In Press',
+      month: work['publication-date']?.month?.value || 'N/A',
+      day: work['publication-date']?.day?.value || 'N/A',
+      journal: work['journal-title']?.value || 'Conference/Journal not specified',
+      type: work.type.replace(/-/g, ' '),
+      url: primaryUrl,
+      externalIds: reducedIds,
+    };
+  }).sort((a, b) => b.year - a.year)
+); // Sort by newest first
+
 ---
+
+<h3>Journal</h3>
+<ul>
+  {publications.map((pubItem) => {
+    if (pubItem.type == "preprint") return;
+    return (
+      <PubItem
+        {...pubItem}
+      />
+    )
+  })}
+</ul>
+
+<h3>Preprint</h3>
+<ul>
+  {publications.map((pubItem) => {
+    if (pubItem.type != "preprint") return;
+    return (
+      <PubItem
+        {...pubItem}
+      />
+    )
+  })}
+</ul>

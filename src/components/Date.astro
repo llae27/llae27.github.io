@@ -1,0 +1,32 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+interface Props extends HTMLAttributes<'span'> {
+  dateStart: string;
+  dateEnd: string;
+}
+const { dateStart, dateEnd } = Astro.props;
+
+function formatDate(d) {
+  // handle exceptions
+  if (!d || typeof d !== 'string') return d;
+
+  const [y, m, day] = d.split('-');
+  const dt = new Date(y, m - 1, day);
+  if (isNaN(dt.getTime())) return d;
+
+  return dt.toLocaleString('en-US', {
+    month: 'short',
+    year: 'numeric'
+  });
+}
+---
+<div
+  x-data="{
+    
+  }"
+  class="text-zinc-600 text-sm"
+>
+  <span class="whitespace-nowrap" title={dateStart}>{formatDate(dateStart)}</span>
+  -
+  <span class="whitespace-nowrap" title={dateEnd}>{formatDate(dateEnd)}</span>
+</div>

@@ -1,7 +1,0 @@
-@import "tailwindcss";
-@source "../../src/**/*.astro";
-
-@theme {
-    --font-sans: "Inter", system-ui, sans-serif;
-    --color-academic-blue: #004477;
-}

@@ -1,15 +1,22 @@
 ---
-const { title, authors, venue, year, link = "#" } = Astro.props;
+import type { HTMLAttributes } from 'astro/types';
+interface Props extends HTMLAttributes<'p'> {
+  year: string;
+  month: string;
+  day: string;
+}
+const { title, authors, journal, year, month, day, url, type, ...attrs } = Astro.props;
 ---
 
-<div class="mb-6 group">
-  <a href={link} class="block">
-    <h3 class="text-lg font-semibold text-zinc-800 group-hover:text-blue-600 transition-colors">
-      {title}
-    </h3>
-    <p class="text-zinc-600 text-sm">{authors}</p>
+<li class="sm:flex sm:flex-row items-start justify-between mb-4">
+  <div class="sm:mr-4">
+    <a href={url} target="_blank">
+      <p>{title}</p>
+    </a>
+    <p class="text-zinc-600 text-sm" set:html={authors}></p>
     <p class="text-zinc-500 text-sm italic">
-      {venue}, {year}
+      {type !== 'preprint' ? journal : "Preprint"}
     </p>
-  </a>
-</div>
+  </div>
+  <p title=`${year}-${month}-${day}` class="text-zinc-600 text-sm">{year}</p>
+</li>

@@ -1,0 +1,44 @@
+@import "tailwindcss";
+@source "../../src/**/*.astro";
+
+@theme {
+  --font-sans: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --color-academic-blue: #004477;
+}
+
+@layer base {
+  html {
+    /* IE and Edge */
+    -ms-overflow-style: none;
+    /* Firefox */
+    scrollbar-width: none;
+  }
+
+  html,
+  body {
+    @apply relative m-0 p-0;
+  }
+
+  body {
+    @apply bg-zinc-50 text-zinc-900 font-sans leading-relaxed;
+    font-feature-settings: "prec", "tnum";
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply break-keep transition-colors;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold mb-4;
+  }
+
+  h2 {
+    @apply text-2xl font-bold border-b-1 border-zinc-300 pb-2 mb-6;
+  }
+
+  h3 {
+    @apply text-lg font-semibold text-zinc-800 mb-4;
+  }
+}
