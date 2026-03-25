@@ -1,0 +1,29 @@
+---
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
+  <title>@CV | Yourae Shin</title>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans leading-relaxed">
+  <nav class="max-w-3xl mx-auto p-8 flex justify-between items-center">
+    <a href="/" class="font-bold text-xl">Dr. Jane Doe</a>
+    <div class="space-x-6">
+      <a href="#research" class="hover:text-blue-600">Research</a>
+      <a href="#publications" class="hover:text-blue-600">Publications</a>
+      <a href="/cv.pdf" class="hover:text-blue-600">CV</a>
+    </div>
+  </nav>
+
+  <main class="max-w-3xl mx-auto px-8 pb-20">
+    <!-- slot content -->
+  </main>
+
+  <footer class="text-center p-10 text-sm text-slate-400">
+    <p>© 2026 Dr. Jane Doe · Built with Astro + Pug</p>
+  </footer>
+</body>
+</html>

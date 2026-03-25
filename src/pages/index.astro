@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PubItem from '../components/PubItem.astro';
+
+const title = "Home";
+---
+
+<BaseLayout title={title}>
+  <section id="about" class="py-10">
+    <h1 class="text-4xl font-extrabold mb-4">
+      Researcher at University X
+    </h1>
+    <p class="text-lg text-slate-700">
+      I work on <strong>Machine Learning</strong> and <strong>Computational Linguistics</strong>.
+      Currently exploring how LLMs interact with Pug templates in 2026.
+    </p>
+  </section>
+
+  <section id="publications" class="mt-12">
+    <h2 class="text-2xl font-bold border-b-2 border-slate-200 mb-6">
+      Publications
+    </h2>
+
+    <PubItem
+      title="Efficient Template Engines for Academic Static Sites"
+      authors="Doe, J., Smith, A."
+      venue="Journal of Web Research"
+      year="2026"
+    />
+
+    <PubItem
+      title="The Impact of Tailwind on CSS Complexity"
+      authors="Doe, J."
+      venue="ICLR"
+      year="2025"
+    />
+  </section>
+</BaseLayout>
