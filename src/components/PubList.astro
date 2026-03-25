@@ -1,0 +1,43 @@
+---
+const orcidId = import.meta.env.ORCID_ID;
+const clientId = import.meta.env.ORCID_CLIENT_ID;
+const clientSecret = import.meta.env.ORCID_CLIENT_SECRET;
+const apiUrl = import.meta.env.ORCID_API_URL;
+
+// 1. Get the Access Token (Client Credentials Flow)
+const tokenResponse = await fetch('https://orcid.org/oauth/token', {
+  method: 'POST',
+  headers: { 'Accept': 'application/json' },
+  body: new URLSearchParams({
+    client_id: clientId,
+    client_secret: clientSecret,
+    grant_type: 'client_credentials',
+    scope: '/read-public'
+  })
+});
+
+const { access_token } = await tokenResponse.json();
+
+// 2. Fetch the Works Summary
+const worksResponse = await fetch(`${apiUrl}/${orcidId}/works`, {
+  headers: {
+    'Authorization': `Bearer ${access_token}`,
+    'Accept': 'application/json'
+  }
+});
+
+const rawData = await worksResponse.json();
+
+// 3. Clean the data (ORCID returns a "group" of works)
+const publications = rawData.group.map((group) => {
+  const work = group['work-summary'][0];
+  console.log(work);
+  return {
+    title: work.title.title.value,
+    year: work['publication-date']?.year?.value || 'N/A',
+    journal: work['journal-title']?.value || 'Conference/Journal not specified',
+    type: work.type.replace(/-/g, ' '),
+    url: work['external-ids']?.['external-identifier']?.[0]?.['external-identifier-url']?.value || '#'
+  };
+}).sort((a, b) => b.year - a.year); // Sort by newest first
+---
