@@ -17,6 +17,6 @@ import { Icon } from 'astro-icon/components';
   @click="toggle()"
   class="p-1 rounded text-zinc-300 bg-zinc-100 dark:text-zinc-800 dark:bg-zinc-950 cursor-pointer"
 >
-  <Icon :class="isDark ? 'visible' : 'hidden'" name="ic:baseline-dark-mode" class="w-5 h-5" />
-  <Icon :class="isDark ? 'hidden' : 'visible'" name="ic:baseline-light-mode" class="w-5 h-5" />
+  <Icon name="ic:baseline-dark-mode" class="hidden dark:block w-5 h-5" />
+  <Icon name="ic:baseline-light-mode" class="dark:hidden block w-5 h-5" />
 </button>

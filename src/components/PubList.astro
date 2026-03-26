@@ -73,7 +73,7 @@ const publications = await Promise.all(
       year: work['publication-date']?.year?.value || 'In Press',
       month: work['publication-date']?.month?.value || 'N/A',
       day: work['publication-date']?.day?.value || 'N/A',
-      journal: work['journal-title']?.value || 'Conference/Journal not specified',
+      journal: work['journal-title']?.value || '',
       type: work.type.replace(/-/g, ' '),
       url: primaryUrl,
       externalIds: reducedIds,
@@ -100,18 +100,20 @@ const publications = await Promise.all(
   <PubItem
     title="A Cloud-based QC Platform for Comprehensive Examination of MS-based Proteomics Data"
     authors="<strong>Yourae Shin</strong> <italic>et al.</italic>"
-    journal="Human Proteome Organization (HUPO) 2023 World Congress (Poster)"
+    venue="Human Proteome Organization (HUPO) 2023 World Congress"
     year="2023"
     month="09"
     address="Busan, Korea"
+    type="Poster"
   />
   <PubItem
     title="MS-based Proteomics Reveals Exosomal Protein Biomarkers for Accurate Diagnosis of Cholangiocarcinoma"
     authors="<strong>Yourae Shin</strong> <italic>et al.</italic>"
-    journal="Korean Society of Extracellular Vesicles (Poster)"
+    venue="Korean Society of Extracellular Vesicles"
     year="2022"
     month="11"
     address="Jeju, Korea"
+    type="Poster"
   />
 </ul>
 

@@ -1,6 +1,8 @@
 ---
 import WorkItem from '../components/WorkItem.astro';
+import InlineAnchor from '../components/InlineAnchor.astro';
 ---
+<h3 id="work-prof">Professional</h3>
 <ul>
   <WorkItem
     job="Assistant research engineer"
@@ -18,7 +20,53 @@ import WorkItem from '../components/WorkItem.astro';
         <p>Led single-cell level untargeted proteomics analysis on HeLa cell lysate for single-cell proteomics analysis workflow standardization.</p>
       </li>
       <li>
-        <p>Automated untargeted proteomics analysis and developed visualization platform for commercial proteomics solution service.</p>
+        <p>Automated untargeted proteomics analysis and developed visualization platform for <InlineAnchor href="https://www.bertis.com/down/[Bertis]%20PASS%20Brochure_2403.pdf" text="commercial proteomics solution service" />.</p>
+      </li>
+    </ul>
+  </WorkItem>
+</ul>
+
+<h3 id="work-intern">Internships</h3>
+<ul>
+  <WorkItem
+    job="Graduate Student Researcher"
+    team="Division of Clinical Bioinformatics"
+    company="Seoul National University Hospital"
+    address="Seoul, Korea"
+    dateStart="2020-05-01"
+    dateEnd="2021-05-30"
+  >
+    <ul class="list-disc text-sm mt-2 ml-4">
+      <li>
+        <p>Led statistical analysis for longitudinal HbA1c prediction in type II diabetes based on electronic medical records (EMR).</p>
+      </li>
+    </ul>
+  </WorkItem>
+  <WorkItem
+    job="Undergraduate Student Researcher"
+    team="Systems Biology and Medicine (SBM) Lab"
+    company="Seoul National University"
+    address="Seoul, Korea"
+    dateStart="2019-05-01"
+    dateEnd="2019-12-30"
+  >
+    <ul class="list-disc text-sm mt-2 ml-4">
+      <li>
+        <p>Led transcriptomic analysis and biological pathway enrichment analysis of Arabidopsis thaliana vernalization model.</p>
+      </li>
+    </ul>
+  </WorkItem>
+  <WorkItem
+    job="Undergraduate Student Researcher"
+    team="Neurophysiology Lab (Advisor: Sukwoo Choi)"
+    company="Seoul National University"
+    address="Seoul, Korea"
+    dateStart="2018-07-01"
+    dateEnd="2018-08-30"
+  >
+    <ul class="list-disc text-sm mt-2 ml-4">
+      <li>
+        <p>Practiced experimental skills including perfusion, cryosection, and immunostaining in rodent model.</p>
       </li>
     </ul>
   </WorkItem>

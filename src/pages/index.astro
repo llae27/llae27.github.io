@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PubList from '../components/PubList.astro';
 import EduItem from '../components/EduItem.astro';
 import AwardItem from '../components/AwardItem.astro';
+import TeachList from '../components/TeachList.astro';
 import WorkList from '../components/WorkList.astro';
 
 const title = "CV | Yourae Shin";
@@ -48,6 +49,11 @@ const title = "CV | Yourae Shin";
   </section>
 
   <section class="mt-12">
+    <h2 id="teaching">Teaching Experience</h2>
+    <TeachList />
+  </section>
+
+  <section class="mt-12">
     <h2 id="awards">Awards and Scholarships</h2>
     <ul>
       <AwardItem
@@ -81,6 +87,27 @@ const title = "CV | Yourae Shin";
         dateEnd="2019-12-31"
         desc="Full tuition and stipend"
       />
+    </ul>
+  </section>
+  
+  <section class="mt-12">
+    <h2 id="skills">Skills</h2>
+    <h3 id="sk-tech">Technical Skills</h2>
+    <ul></ul>
+    <h3 id="sk-languages">Languages</h2>
+    <ul class="sm:grid grid-cols-3 gap-x-2">
+      <li>
+        <p>Korean</p>
+        <p class="acc1">Native</p>
+      </li>
+      <li>
+        <p>English</p>
+        <p class="acc1">Full Professional Proficiency</p>
+      </li>
+      <li>
+        <p>Japanese</p>
+        <p class="acc1">Elementary Proficiency</p>
+      </li>
     </ul>
   </section>
 </BaseLayout>

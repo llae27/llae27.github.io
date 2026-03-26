@@ -6,7 +6,7 @@ interface Props extends HTMLAttributes<'p'> {
   month: string;
   day: string;
 }
-const { title, authors, journal, year, month, day, address, url, type, externalIds, ...attrs } = Astro.props;
+const { title, authors, journal, year, month, day, venue, address, url, type, externalIds, ...attrs } = Astro.props;
 const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 ---
 
@@ -18,7 +18,9 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
     <p class="acc1" set:html={authors}></p>
     <div class="flex flex-row items-center space-x-2">
       <p class="acc2">
-        {type !== 'preprint' ? journal : 'Preprint'}{address ? ', '+address : ''}
+        {journal}
+        {type === 'preprint' && ('Preprint')}
+        {venue && (`${venue}, ${address} (${type})`)}
       </p>
       <ul class="flex flex-row items-center space-x-2">
         {externalIds?.doi && (

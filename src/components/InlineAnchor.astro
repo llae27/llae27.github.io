@@ -1,0 +1,7 @@
+---
+import { Icon } from 'astro-icon/components';
+const { href, target="_blank", text } = Astro.props;
+---
+<a href={href} target={target} class="anchor">
+    {text}<Icon name="ic:baseline-launch" class="inline" />
+</a>
