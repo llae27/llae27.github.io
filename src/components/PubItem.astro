@@ -26,14 +26,14 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
         {externalIds?.doi && (
           <li>
             <a href={`${externalIds.doi.url}`} target="_blank">
-              <Icon name="doi" class="pubIcon"/>
+              <Icon name="doi" />
             </a>
           </li>
         )}
         {externalIds?.pmid && (
           <li>
             <a href={`${externalIds.pmid.url}`} target="_blank">
-              <Icon name="pubmed-square" class="pubIcon"/>
+              <Icon name="pubmed-square" />
             </a>
           </li>
         )}
@@ -42,3 +42,10 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
   </div>
   <p title={date} class="acc1">{year}</p>
 </li>
+
+<style>
+  @reference "../styles/common.css";
+  svg {
+    @apply w-4 h-4 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 hover:dark:text-zinc-200;
+  }
+</style>

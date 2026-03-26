@@ -12,7 +12,7 @@ import InlineAnchor from '../components/InlineAnchor.astro';
     dateStart="2022-06-27"
     dateEnd="2024-06-30"
   >
-    <ul class="list-disc text-sm mt-2 ml-4">
+    <ul class="workdesc">
       <li>
         <p>Led diagnostic biomarker discovery based on systematic analysis of untargeted plasma proteome profiles in cholangiocarcinoma and prostate cancer.</p>
       </li>
@@ -30,13 +30,13 @@ import InlineAnchor from '../components/InlineAnchor.astro';
 <ul>
   <WorkItem
     job="Graduate Student Researcher"
-    team="Division of Clinical Bioinformatics"
+    team="Division of Clinical Bioinformatics (Advisor: Kwangsoo Kim)"
     company="Seoul National University Hospital"
     address="Seoul, Korea"
     dateStart="2020-05-01"
     dateEnd="2021-05-30"
   >
-    <ul class="list-disc text-sm mt-2 ml-4">
+    <ul class="workdesc">
       <li>
         <p>Led statistical analysis for longitudinal HbA1c prediction in type II diabetes based on electronic medical records (EMR).</p>
       </li>
@@ -44,13 +44,13 @@ import InlineAnchor from '../components/InlineAnchor.astro';
   </WorkItem>
   <WorkItem
     job="Undergraduate Student Researcher"
-    team="Systems Biology and Medicine (SBM) Lab"
+    team="Systems Biology and Medicine (SBM) Lab (Advisor: Daehee Hwang)"
     company="Seoul National University"
     address="Seoul, Korea"
     dateStart="2019-05-01"
     dateEnd="2019-12-30"
   >
-    <ul class="list-disc text-sm mt-2 ml-4">
+    <ul class="workdesc">
       <li>
         <p>Led transcriptomic analysis and biological pathway enrichment analysis of Arabidopsis thaliana vernalization model.</p>
       </li>
@@ -64,10 +64,17 @@ import InlineAnchor from '../components/InlineAnchor.astro';
     dateStart="2018-07-01"
     dateEnd="2018-08-30"
   >
-    <ul class="list-disc text-sm mt-2 ml-4">
+    <ul class="workdesc">
       <li>
         <p>Practiced experimental skills including perfusion, cryosection, and immunostaining in rodent model.</p>
       </li>
     </ul>
   </WorkItem>
 </ul>
+
+<style>
+  @reference "../styles/common.css";
+  ul.workdesc {
+    @apply list-disc text-zinc-700 dark:text-zinc-400 text-sm mt-2 ml-4;
+  }
+</style>

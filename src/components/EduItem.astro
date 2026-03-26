@@ -1,6 +1,6 @@
 ---
 import Date from '../components/Date.astro';
-const { school, address, admitDate, gradDate = "Current", program, dept } = Astro.props;
+const { school, address, admitDate, gradDate = "Current", program, dept, advisor } = Astro.props;
 ---
 
 <li class="sm:grid grid-cols-4 gap-x-2 items-start justify-between mb-4">
@@ -11,6 +11,7 @@ const { school, address, admitDate, gradDate = "Current", program, dept } = Astr
   <div class="col-start-2 col-end-5">
     <p class="font-semibold">{program}</p>
     <p class="acc1">{dept}</p>
+    <p class="acc1">Advisor: {advisor}</p>
     <p class="acc2">{school}, {address}</p>
   </div>
 </li>
