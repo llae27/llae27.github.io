@@ -1,0 +1,69 @@
+---
+
+---
+<aside class="fixed hidden lg:flex flex-row items-center h-screen top-0 right-0 pointer-events-none">
+  <nav x-data="toc" class="group mr-12 pointer-events-auto">
+    <ul class="space-y-1">
+      <template x-for="heading in headings" :key="heading.id">
+        <li>
+          <a 
+            :href="'#' + heading.id"
+            class="flex flex-row items-center justify-end text-sm"
+          >
+            <marker
+              class="absolute block h-1 rounded-sm transition-all duration-200 group-hover:opacity-0"
+              :class="{
+                'w-4': heading.level === 'h3',
+                'w-6': heading.level !== 'h3',
+                'bg-blue-400': activeId === heading.id,
+                'bg-zinc-300 dark:bg-zinc-800': activeId !== heading.id
+              }"
+            ></marker>
+            <span
+              class="whitespace-nowrap transition-all duration-200 opacity-0 group-hover:opacity-100"
+              :class="activeId === heading.id 
+                ? 'text-blue-400 font-medium'
+                : 'text-zinc-500'"
+              x-text="heading.text"></span>
+          </a>
+        </li>
+      </template>
+    </ul>
+  </nav>
+</aside>
+
+<script>
+document.addEventListener('alpine:init', () => {
+  Alpine.data('toc', () => ({
+    headings: [],
+    activeId: '',
+    init() {
+      const elements = Array.from(document.querySelectorAll('main h2, main h3'));
+      this.headings = elements.map(el => {
+        if (!el.id) {
+          el.id = el.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+        }
+        return {
+          id: el.id,
+          text: el.textContent,
+          level: el.tagName.toLowerCase()
+        };
+      });
+      // We use a custom event to refresh the observer when Astro swaps pages
+      this.setupObserver();
+      document.addEventListener('astro:page-load', () => this.setupObserver());
+    },
+    setupObserver() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.activeId = entry.target.id;
+          }
+        });
+      }, { rootMargin: '0px 0px -80% 0px' });
+      // Clean up is handled by the browser when elements are removed
+      document.querySelectorAll('h2, h3').forEach((h) => observer.observe(h));
+    }
+  }));
+});
+</script>

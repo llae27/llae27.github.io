@@ -1,14 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PubList from '../components/PubList.astro';
-import PubItem from '../components/PubItem.astro';
 import EduItem from '../components/EduItem.astro';
+import AwardItem from '../components/AwardItem.astro';
+import WorkList from '../components/WorkList.astro';
 
 const title = "CV | Yourae Shin";
 ---
 <BaseLayout title={title}>
-  <section id="education" class="mt-12">
-    <h2>Education</h2>
+  <section class="mt-12">
+    <h2 id="education">Education</h2>
     <ul>
       <EduItem
         school="University of California, Riverside"
@@ -20,24 +21,66 @@ const title = "CV | Yourae Shin";
       <EduItem
         school="Seoul National University"
         address="Seoul, Korea"
-        admitDate="2020-03-01"
-        gradDate="2022-02-28"
+        admitDate="2020-03-02"
+        gradDate="2022-02-25"
         program="Master of Science in Biological Science"
         dept="School of Biological Science"
       />
       <EduItem
         school="Seoul National University"
         address="Seoul, Korea"
-        admitDate="2015-03-01"
-        gradDate="2020-02-28"
+        admitDate="2015-03-02"
+        gradDate="2020-02-26"
         program="Bachelor of Science in Biological Science"
         dept="School of Biological Science"
       />
     </ul>
   </section>
 
-  <section id="publications" class="mt-12">
-    <h2>Publications</h2>
+  <section class="mt-12">
+    <h2 id="publications">Publications</h2>
     <PubList />
+  </section>
+
+  <section class="mt-12">
+    <h2 id="work">Work Experience</h2>
+    <WorkList />
+  </section>
+
+  <section class="mt-12">
+    <h2 id="awards">Awards and Scholarships</h2>
+    <ul>
+      <AwardItem
+        title="Dean's Distinguished Award"
+        inst="University of California, Riverside"
+        addr="Riverside, California"
+        dateStart="2024-09-23"
+        dateEnd="2025-06-13"
+        desc="Full tuition and stipend"
+      />
+      <AwardItem
+        title="Brain Korea 21 Four Outstanding Paper Award"
+        inst="National Research Foundation of Korea"
+        addr="Korea"
+        dateStart="2021-02-22"
+        desc="Outstanding Paper Incentive"
+      />
+      <AwardItem
+        title="Brain Korea 21 Four Scholarship"
+        inst="National Research Foundation of Korea"
+        addr="Korea"
+        dateStart="2020-09-01"
+        dateEnd="2021-12-31"
+        desc="Full tuition"
+      />
+      <AwardItem
+        title="The Presidential Science Scholarship"
+        inst="Korea Student Aid Foundation"
+        addr="Korea"
+        dateStart="2015-03-02"
+        dateEnd="2019-12-31"
+        desc="Full tuition and stipend"
+      />
+    </ul>
   </section>
 </BaseLayout>

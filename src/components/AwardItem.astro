@@ -1,0 +1,15 @@
+---
+import Date from '../components/Date.astro';
+const { title, inst, desc, dateStart, dateEnd, ...attrs } = Astro.props;
+---
+<li class="sm:flex sm:flex-row items-start justify-between mb-4">
+  <div class="sm:mr-4">
+    <p>{title}</p>
+    <p class="acc1">{inst}</p>
+    <p class="acc2">{desc}</p>
+  </div>
+  <Date
+    dateStart={dateStart}
+    dateEnd={dateEnd}
+  />
+</li>

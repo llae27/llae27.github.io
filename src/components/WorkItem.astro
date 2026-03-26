@@ -1,0 +1,19 @@
+---
+import Date from '../components/Date.astro';
+const { company, address, dateStart, dateEnd = "Current", job, team } = Astro.props;
+---
+
+<li class="mb-4">
+  <div class="sm:grid grid-cols-4 gap-x-2 items-start justify-between">
+    <Date
+      dateStart={dateStart}
+      dateEnd={dateEnd}
+    />
+    <div class="col-start-2 col-end-5">
+      <p class="font-semibold">{job}</p>
+      <p class="acc1">{team}</p>
+      <p class="acc2">{company}, {address}</p>
+    </div>
+  </div>
+  <slot />
+</li>

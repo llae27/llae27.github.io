@@ -1,11 +1,13 @@
 ---
+import { Icon } from 'astro-icon/components';
 import type { HTMLAttributes } from 'astro/types';
 interface Props extends HTMLAttributes<'p'> {
   year: string;
   month: string;
   day: string;
 }
-const { title, authors, journal, year, month, day, url, type, ...attrs } = Astro.props;
+const { title, authors, journal, year, month, day, address, url, type, externalIds, ...attrs } = Astro.props;
+const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 ---
 
 <li class="sm:flex sm:flex-row items-start justify-between mb-4">
@@ -13,10 +15,28 @@ const { title, authors, journal, year, month, day, url, type, ...attrs } = Astro
     <a href={url} target="_blank">
       <p>{title}</p>
     </a>
-    <p class="text-zinc-600 text-sm" set:html={authors}></p>
-    <p class="text-zinc-500 text-sm italic">
-      {type !== 'preprint' ? journal : "Preprint"}
-    </p>
+    <p class="acc1" set:html={authors}></p>
+    <div class="flex flex-row items-center space-x-2">
+      <p class="acc2">
+        {type !== 'preprint' ? journal : 'Preprint'}{address ? ', '+address : ''}
+      </p>
+      <ul class="flex flex-row items-center space-x-2">
+        {externalIds?.doi && (
+          <li>
+            <a href={`${externalIds.doi.url}`} target="_blank">
+              <Icon name="doi" class="pubIcon"/>
+            </a>
+          </li>
+        )}
+        {externalIds?.pmid && (
+          <li>
+            <a href={`${externalIds.pmid.url}`} target="_blank">
+              <Icon name="pubmed-square" class="pubIcon"/>
+            </a>
+          </li>
+        )}
+      </ul>
+    </div>
   </div>
-  <p title=`${year}-${month}-${day}` class="text-zinc-600 text-sm">{year}</p>
+  <p title={date} class="acc1">{year}</p>
 </li>

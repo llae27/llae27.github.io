@@ -83,7 +83,7 @@ const publications = await Promise.all(
 
 ---
 
-<h3>Journal</h3>
+<h3 id="pub-journal">Journal</h3>
 <ul>
   {publications.map((pubItem) => {
     if (pubItem.type == "preprint") return;
@@ -95,7 +95,27 @@ const publications = await Promise.all(
   })}
 </ul>
 
-<h3>Preprint</h3>
+<h3 id="pub-presentation">Presentation</h3>
+<ul>
+  <PubItem
+    title="A Cloud-based QC Platform for Comprehensive Examination of MS-based Proteomics Data"
+    authors="<strong>Yourae Shin</strong> <italic>et al.</italic>"
+    journal="Human Proteome Organization (HUPO) 2023 World Congress (Poster)"
+    year="2023"
+    month="09"
+    address="Busan, Korea"
+  />
+  <PubItem
+    title="MS-based Proteomics Reveals Exosomal Protein Biomarkers for Accurate Diagnosis of Cholangiocarcinoma"
+    authors="<strong>Yourae Shin</strong> <italic>et al.</italic>"
+    journal="Korean Society of Extracellular Vesicles (Poster)"
+    year="2022"
+    month="11"
+    address="Jeju, Korea"
+  />
+</ul>
+
+<h3 id="pub-preprint">Preprint</h3>
 <ul>
   {publications.map((pubItem) => {
     if (pubItem.type != "preprint") return;

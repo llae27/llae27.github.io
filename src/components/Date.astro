@@ -20,13 +20,8 @@ function formatDate(d) {
   });
 }
 ---
-<div
-  x-data="{
-    
-  }"
-  class="text-zinc-600 text-sm"
->
+<p class="acc1">
   <span class="whitespace-nowrap" title={dateStart}>{formatDate(dateStart)}</span>
-  -
+  {dateEnd ? '-' : ''}
   <span class="whitespace-nowrap" title={dateEnd}>{formatDate(dateEnd)}</span>
-</div>
+</p>
