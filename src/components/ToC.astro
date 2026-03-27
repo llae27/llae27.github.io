@@ -16,14 +16,14 @@
               :class="{
                 'w-4': heading.level === 'h3',
                 'w-6': heading.level !== 'h3',
-                'bg-blue-400': activeId === heading.id,
+                'bg-amber-400': activeId === heading.id,
                 'bg-zinc-300 dark:bg-zinc-800': activeId !== heading.id
               }"
             ></marker>
             <span
               class="whitespace-nowrap transition-all duration-200 opacity-0 group-hover:opacity-100"
               :class="activeId === heading.id 
-                ? 'text-blue-400 font-medium'
+                ? 'text-amber-400 font-medium'
                 : 'text-zinc-500 hover:text-zinc-600'"
               x-text="heading.text"></span>
           </a>
