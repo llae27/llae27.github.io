@@ -6,7 +6,19 @@ const clientId = import.meta.env.ORCID_CLIENT_ID;
 const clientSecret = import.meta.env.ORCID_CLIENT_SECRET;
 const apiUrl = import.meta.env.ORCID_API_URL;
 
-// 1. Get the Access Token (Client Credentials Flow)
+// ORCID override
+const orcidOverrides = {
+  // putcode as a key
+  '144996575': {
+    award: 'BK21 Four Outstanding Paper Award',
+    authors: {
+      'Yoo JY': 'first',
+      'Hyeon DY': 'first',
+      'Shin Y': 'first'
+    }
+  }
+};
+
 const tokenResponse = await fetch('https://orcid.org/oauth/token', {
   method: 'POST',
   headers: { 'Accept': 'application/json' },
@@ -17,10 +29,8 @@ const tokenResponse = await fetch('https://orcid.org/oauth/token', {
     scope: '/read-public'
   })
 });
-
 const { access_token } = await tokenResponse.json();
 
-// 2. Fetch the Works Summary
 const worksResponse = await fetch(`${apiUrl}/${orcidId}/works`, {
   headers: {
     'Authorization': `Bearer ${access_token}`,
@@ -29,7 +39,6 @@ const worksResponse = await fetch(`${apiUrl}/${orcidId}/works`, {
 });
 const rawData = await worksResponse.json();
 
-// 3. Clean the data (ORCID returns a "group" of works)
 const publications = await Promise.all(
   rawData.group.map(async (group) => {
     const work = group['work-summary'][0];
@@ -44,8 +53,8 @@ const publications = await Promise.all(
     const contributors = detail['contributors']['contributor'] || [];
     const authorList = contributors.map((c, index) => {
       const name = c['credit-name']?.value;
-      const isFirst = c['contributor-attributes']?.['contributor-sequence'] === 'first';
-      const isYou = name === "Yourae Shin" || name === "Shin Y" ; // Replace with your actual name
+      const isFirst = index == 0 || orcidOverrides[putCode]?.authors?.[name] === 'first' || c['contributor-attributes']?.['contributor-sequence'] === 'first'; // it doesn't really work; require override
+      const isYou = name === "Yourae Shin" || name === "Shin Y" ;
       // style
       let displayName = name;
       if (isFirst) displayName = `${displayName}*`;
@@ -77,6 +86,7 @@ const publications = await Promise.all(
       type: work.type.replace(/-/g, ' '),
       url: primaryUrl,
       externalIds: reducedIds,
+      award: orcidOverrides[putCode]?.award,
     };
   }).sort((a, b) => b.year - a.year)
 ); // Sort by newest first

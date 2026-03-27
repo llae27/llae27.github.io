@@ -6,6 +6,7 @@ import EduItem from '../components/EduItem.astro';
 import AwardItem from '../components/AwardItem.astro';
 import TeachList from '../components/TeachList.astro';
 import WorkList from '../components/WorkList.astro';
+import SkillList from '../components/SkillList.astro';
 
 const title = "CV | Yourae Shin";
 ---
@@ -17,6 +18,7 @@ const title = "CV | Yourae Shin";
       email="yshin062@ucr.edu"
       webpage="llae27.github.io"
       orcid="0000-0002-3274-726X"
+      gscholar="fpwim2IAAAAJ"
     />
   </section>
   <section class="mt-12">
@@ -105,22 +107,6 @@ const title = "CV | Yourae Shin";
   
   <section class="mt-12">
     <h2 id="skills">Skills</h2>
-    <h3 id="sk-tech">Technical Skills</h2>
-    <ul></ul>
-    <h3 id="sk-languages">Languages</h2>
-    <ul class="sm:grid grid-cols-3 gap-x-2">
-      <li>
-        <p>Korean</p>
-        <p class="acc1">Native</p>
-      </li>
-      <li>
-        <p>English</p>
-        <p class="acc1">Full Professional Proficiency</p>
-      </li>
-      <li>
-        <p>Japanese</p>
-        <p class="acc1">Elementary Proficiency</p>
-      </li>
-    </ul>
+    <SkillList />
   </section>
 </BaseLayout>

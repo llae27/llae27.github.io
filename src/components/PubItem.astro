@@ -6,15 +6,20 @@ interface Props extends HTMLAttributes<'p'> {
   month: string;
   day: string;
 }
-const { title, authors, journal, year, month, day, venue, address, url, type, externalIds, ...attrs } = Astro.props;
+const { title, authors, journal, year, month, day, venue, address, url, type, externalIds, award, ...attrs } = Astro.props;
 const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 ---
 
 <li class="sm:flex sm:flex-row items-start justify-between mb-4">
   <div class="sm:mr-4">
-    <a href={url} target="_blank">
+    {url && (
+      <a href={url} target="_blank">
+        <p>{title}</p>
+      </a>
+    )}
+    {!url && (
       <p>{title}</p>
-    </a>
+    )}
     <p class="acc1" set:html={authors}></p>
     <div class="flex flex-row items-center space-x-2">
       <p class="acc2">
@@ -37,6 +42,12 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
             </a>
           </li>
         )}
+        {award && (
+          <li class="award">
+            <Icon name="ic:baseline-emoji-events" />
+            <span>{award}</span>
+          </li>
+        )}
       </ul>
     </div>
   </div>
@@ -45,7 +56,11 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 
 <style>
   @reference "../styles/common.css";
+  a {@apply hover:underline;}
   svg {
     @apply w-4 h-4 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 hover:dark:text-zinc-200;
   }
+  li.award {@apply flex flex-row items-center space-x-1 text-yellow-500;}
+  li.award > svg {@apply text-yellow-500 dark:text-yellow-600;}
+  li.award > span {@apply text-sm text-yellow-500 dark:text-yellow-600;}
 </style>

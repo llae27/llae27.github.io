@@ -31,9 +31,35 @@ const { title } = Astro.props;
   </script>
 </head>
 <body>
-  <nav class="fixed w-full top-0 left-0 right-0">
-    <div class="max-w-3xl mx-auto p-8 flex justify-between items-center backdrop-blur-lg">
-      <a href="/" class="font-bold text-xl">Yourae Shin</a>
+  <nav
+    x-data="{ 
+      atTop: true, 
+      isScrollingDown: false, 
+      lastScrollY: 0 
+    }"
+    x-init="lastScrollY = window.scrollY"
+    @scroll.window="
+      isScrollingDown = window.scrollY > lastScrollY && window.scrollY > 50;
+      atTop = window.scrollY < 10;
+      lastScrollY = window.scrollY;
+    "
+    class="fixed w-full top-0 left-0 right-0"
+  >
+    <div 
+      :class="{
+        'backdrop-blur-lg': !isScrollingDown && !atTop
+      }"
+      class="max-w-3xl mx-auto p-8 flex justify-between items-center"
+    >
+      <div
+        class="transition-opacity transition-200"
+        :class="{ 
+          'opacity-100': !isScrollingDown || atTop, 
+          'opacity-0': isScrollingDown && !atTop,
+        }"
+      >
+        <a href="/" class="font-bold text-xl">Yourae Shin</a>
+      </div>
       <div class="space-x-6">
         <ThemeBtn />
       </div>
@@ -47,8 +73,11 @@ const { title } = Astro.props;
     <slot />
   </main>
 
-  <footer class="text-center p-10 text-sm text-zinc-400">
-    <p>© 2026 Yourae Shin · Built with Astro</p>
+  <footer class="max-w-3xl mx-auto px-8 pb-20 text-sm text-zinc-300 dark:text-zinc-600">
+    <div class="flex flex-row items-center justify-between">
+      <p>© 2026 Yourae Shin</p>
+      <p>Built with Astro · AlpineJS · TailwindCSS</p>
+    </div>
   </footer>
 </body>
 </html>

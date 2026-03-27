@@ -8,6 +8,7 @@
         <li>
           <a 
             :href="'#' + heading.id"
+            @click="activeId = heading.id"
             class="flex flex-row items-center justify-end text-sm"
           >
             <marker
