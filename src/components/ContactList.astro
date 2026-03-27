@@ -1,9 +1,13 @@
 ---
 import { Icon } from 'astro-icon/components';
-const { email, webpage, orcid, gscholar } = Astro.props;
+const { email, github, webpage, orcid, gscholar } = Astro.props;
 ---
 <div class="mt-4">
-  <ul class="grid grid-flow-col sm:grid-rows-2 gap-x-2">
+  <ul class="grid grid-flow-col sm:grid-rows-3 gap-x-2">
+    <li>
+      <Icon title="It's sunny here" name="ic:baseline-wb-sunny" class="text-amber-400" />
+      <span>Riverside, California</span>
+    </li>
     <li>
       <Icon name="ic:baseline-email"/>
       <span>{email}</span>
@@ -11,6 +15,10 @@ const { email, webpage, orcid, gscholar } = Astro.props;
     <li>
       <Icon name="ic:baseline-home"/>
       <a href=`https://${webpage}`>{webpage}</a>
+    </li>
+    <li>
+      <Icon name="octicon:mark-github-24" />
+      <a href=`https://github.com/${github}`>GitHub</a>
     </li>
     <li>
       <Icon name="google-scholar-square"/>
@@ -25,8 +33,8 @@ const { email, webpage, orcid, gscholar } = Astro.props;
 
 <style>
   @reference "../styles/common.css";
-  li {@apply flex flex-row items-center space-x-2;}
-  svg {@apply text-zinc-600 dark:text-zinc-500 w-4 h-4;}
+  li {@apply flex flex-row items-center space-x-2 text-zinc-600 dark:text-zinc-500;}
+  svg {@apply w-4 h-4;}
   a, span {@apply text-zinc-800 dark:text-zinc-300 text-sm;}
   a {@apply hover:text-zinc-900 hover:dark:text-zinc-200 hover:underline;}
 </style>
