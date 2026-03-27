@@ -37,15 +37,15 @@
   }
 
   h1 {
-    @apply text-4xl print:text-3xl font-extrabold mb-el;
+    @apply text-4xl print:text-2xl font-extrabold mb-el;
   }
 
   h2 {
-    @apply text-2xl print:text-xl font-bold border-b-1 border-zinc-300 dark:border-zinc-800 print:border-zinc-800 pb-ls mb-ls;
+    @apply text-2xl print:text-lg font-bold border-b-1 border-zinc-300 dark:border-zinc-800 print:border-zinc-800 pb-ls mb-ls;
   }
 
   h3 {
-    @apply text-lg font-semibold text-zinc-800 dark:text-zinc-300 print:text-zinc-800 mb-el;
+    @apply text-lg print:text-base font-semibold text-zinc-800 dark:text-zinc-300 print:text-zinc-800 mb-el;
   }
 
   p.title {}

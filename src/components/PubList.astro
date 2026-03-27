@@ -1,4 +1,7 @@
 ---
+import { Cite } from '@citation-js/core';
+import '@citation-js/plugin-bibtex';
+import '@citation-js/plugin-csl';
 import PubItem from '../components/PubItem.astro';
 
 const orcidId = import.meta.env.ORCID_ID;
@@ -76,6 +79,21 @@ const publications = await Promise.all(
     }, {});
     const primaryUrl = reducedIds.doi?.url || reducedIds.arxiv?.url || externalIds[0]?.['external-id-url']?.value || "#";
 
+    // get bibtex
+    const bibtexRes = await fetch(`https://doi.org/${reducedIds.doi.value}`, {
+      headers: { 'Accept': 'application/x-bibtex' }
+    });
+    const bibtex = await bibtexRes.text();
+
+    // Create a citation object
+    const cite = new Cite(bibtex.replace(/\s+/g, ' ').trim());
+    // Output as APA Style HTML
+    const citeApa = cite.format('bibliography', {
+      template: 'apa',
+      format: 'html',
+      lang: 'en-US'
+    });
+
     return {
       title: work.title.title.value,
       authors: authorList || "Authors not listed",
@@ -87,6 +105,8 @@ const publications = await Promise.all(
       url: primaryUrl,
       externalIds: reducedIds,
       award: orcidOverrides[putCode]?.award,
+      bibtex: bibtex,
+      citeApa: citeApa,
     };
   }).sort((a, b) => b.year - a.year)
 ); // Sort by newest first

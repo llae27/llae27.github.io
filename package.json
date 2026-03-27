@@ -23,6 +23,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
+    "citation-js": "^0.7.22",
     "pug": "^3.0.4"
   }
 }
