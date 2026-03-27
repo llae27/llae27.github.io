@@ -4,7 +4,12 @@
 
 @theme {
   --font-sans: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --color-academic-blue: #004477;
+  --font-serif: "Times New Roman", "Times", "STTime", "Baskerville", "Georgia", serif;
+  --margin-sec: calc(var(--spacing) * 12);
+  --margin-ls: calc(var(--spacing) * 6);
+  --margin-el: calc(var(--spacing) * 4);
+  --margin-space: calc(var(--spacing) * 2);
+  --padding-ls: calc(var(--spacing) * 2);
 }
 
 @layer base {
@@ -32,30 +37,43 @@
   }
 
   h1 {
-    @apply text-4xl font-extrabold mb-4;
+    @apply text-4xl print:text-3xl font-extrabold mb-el;
   }
 
   h2 {
-    @apply text-2xl font-bold border-b-1 border-zinc-300 dark:border-zinc-800 pb-2 mb-6;
+    @apply text-2xl print:text-xl font-bold border-b-1 border-zinc-300 dark:border-zinc-800 print:border-zinc-800 pb-ls mb-ls;
   }
 
   h3 {
-    @apply text-lg font-semibold text-zinc-800 dark:text-zinc-300 mb-4;
+    @apply text-lg font-semibold text-zinc-800 dark:text-zinc-300 print:text-zinc-800 mb-el;
   }
 
-  p {
-    @apply leading-6;
-  }
+  p.title {}
 
   p.acc1 {
-    @apply text-zinc-600 dark:text-zinc-500 text-sm;
+    @apply text-zinc-600 dark:text-zinc-500 print:text-zinc-600 text-sm;
   }
 
   p.acc2 {
-    @apply text-zinc-500 dark:text-zinc-600 text-sm italic;
+    @apply text-zinc-500 dark:text-zinc-600 print:text-zinc-600 text-sm italic;
   }
 
   italic {
     @apply italic;
+  }
+
+  @media print {
+    html {
+      font-size: 12pt;
+    }
+
+    main {
+      @apply font-serif text-zinc-900 leading-tight;
+      --margin-sec: calc(var(--spacing) * 4);
+      --margin-ls: calc(var(--spacing) * 2);
+      --margin-el: calc(var(--spacing) * 2);
+      --margin-space: calc(var(--spacing) * 1);
+      --padding-ls: calc(var(--spacing) * 1);
+    }
   }
 }

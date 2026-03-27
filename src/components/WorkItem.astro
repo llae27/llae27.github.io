@@ -3,17 +3,27 @@ import Date from '../components/Date.astro';
 const { company, address, dateStart, dateEnd = "Current", job, team } = Astro.props;
 ---
 
-<li class="mb-4">
-  <div class="sm:flex sm:flex-row items-start justify-between">
-    <div class="col-start-1 col-end-4">
+<li class="mb-el">
+  <div>
+    <div class="sm:flex sm:flex-row items-start justify-between">
       <p>{job}</p>
-      <p class="acc1">{team}</p>
-      <p class="acc2">{company}, {address}</p>
+      <Date
+        dateStart={dateStart}
+        dateEnd={dateEnd}
+      />
     </div>
-    <Date
-      dateStart={dateStart}
-      dateEnd={dateEnd}
-    />
+    <p class="acc1">{team}</p>
+    <p class="acc2">{company}, {address}</p>
   </div>
   <slot />
 </li>
+
+<style>
+  @reference "../styles/common.css";
+  @layer base {
+    p.acc1, p.acc2 {@apply print:inline;}
+    @media print {
+      p.acc1::after {content: ",";}
+    }
+  }
+</style>

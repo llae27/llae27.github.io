@@ -10,15 +10,15 @@ const { title, authors, journal, year, month, day, venue, address, url, type, ex
 const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 ---
 
-<li class="sm:flex sm:flex-row items-start justify-between mb-4">
-  <div class="sm:mr-4">
+<li class="sm:flex sm:flex-row items-start justify-between gap-x-4 mb-el">
+  <div>
     {url && (
       <a href={url} target="_blank">
-        <p>{title}</p>
+        <p class="title">{title}</p>
       </a>
     )}
     {!url && (
-      <p>{title}</p>
+      <p class="title">{title}</p>
     )}
     <p class="acc1" set:html={authors}></p>
     <div class="sm:flex flex-row items-center space-x-2">
@@ -58,11 +58,13 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 
 <style>
   @reference "../styles/common.css";
-  a {@apply hover:underline;}
-  svg {
-    @apply w-4 h-4 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 hover:dark:text-zinc-200;
+  @layer base {
+    a {@apply hover:underline;}
+    svg {
+      @apply w-4 h-4 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 hover:dark:text-zinc-200 print:hidden;
+    }
+    div.award {@apply flex flex-row items-center space-x-1 text-yellow-500 print:hidden;}
+    div.award > svg {@apply text-yellow-500 dark:text-yellow-600;}
+    div.award > span {@apply text-sm text-yellow-500 dark:text-yellow-600;}
   }
-  div.award {@apply flex flex-row items-center space-x-1 text-yellow-500;}
-  div.award > svg {@apply text-yellow-500 dark:text-yellow-600;}
-  div.award > span {@apply text-sm text-yellow-500 dark:text-yellow-600;}
 </style>

@@ -11,9 +11,9 @@ import SkillList from '../components/SkillList.astro';
 const title = "CV | Yourae Shin";
 ---
 <BaseLayout title={title}>
-  <section class="mt-12">
-    <h1 id="about">503 Service Unavailable</h1>
-    <p>This Curriculum Vitae is under construction. Please proceed with caution.</p>
+  <section class="mt-sec">
+    <h1 id="about" class="print:text-center">503 Service Unavailable</h1>
+    <p class="print:text-center">This Curriculum Vitae is under construction. Please proceed with caution.</p>
     <ContactList
       email="yshin062@ucr.edu"
       github="llae27"
@@ -22,7 +22,7 @@ const title = "CV | Yourae Shin";
       gscholar="fpwim2IAAAAJ"
     />
   </section>
-  <section class="mt-12">
+  <section class="mt-sec">
     <h2 id="education">Education</h2>
     <ul>
       <EduItem
@@ -54,22 +54,22 @@ const title = "CV | Yourae Shin";
     </ul>
   </section>
 
-  <section class="mt-12">
+  <section class="mt-sec">
     <h2 id="publications">Publications</h2>
     <PubList />
   </section>
 
-  <section class="mt-12">
-    <h2 id="work">Work Experience</h2>
+  <section class="mt-sec">
+    <h2 id="work">Research Experience</h2>
     <WorkList />
   </section>
 
-  <section class="mt-12">
+  <section class="mt-sec">
     <h2 id="teaching">Teaching Experience</h2>
     <TeachList />
   </section>
 
-  <section class="mt-12">
+  <section class="mt-sec">
     <h2 id="awards">Awards and Scholarships</h2>
     <ul>
       <AwardItem
@@ -106,7 +106,7 @@ const title = "CV | Yourae Shin";
     </ul>
   </section>
   
-  <section class="mt-12">
+  <section class="mt-sec">
     <h2 id="skills">Skills</h2>
     <SkillList />
   </section>

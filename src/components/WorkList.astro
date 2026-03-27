@@ -74,7 +74,9 @@ import InlineAnchor from '../components/InlineAnchor.astro';
 
 <style>
   @reference "../styles/common.css";
-  ul.workdesc {
-    @apply list-disc text-zinc-700 dark:text-zinc-400 text-sm mt-2 ml-4;
+  @layer base {
+    ul.workdesc {
+      @apply list-disc text-zinc-700 dark:text-zinc-400 print:text-zinc-700 text-sm mt-space ml-4;
+    }
   }
 </style>

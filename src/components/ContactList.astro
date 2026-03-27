@@ -2,9 +2,9 @@
 import { Icon } from 'astro-icon/components';
 const { email, github, webpage, orcid, gscholar } = Astro.props;
 ---
-<div class="mt-4">
-  <ul class="sm:grid sm:grid-flow-col sm:grid-rows-3 gap-x-2">
-    <li>
+<div class="mt-el">
+  <ul class="sm:grid sm:grid-flow-col sm:grid-rows-3 gap-x-2 print:flex print:flex-row print:justify-center">
+    <li class="no-print">
       <Icon title="It's sunny here" name="ic:baseline-wb-sunny" class="text-amber-400" />
       <span>Riverside, California</span>
     </li>
@@ -13,18 +13,18 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
       <span>{email}</span>
     </li>
     <li>
-      <Icon name="ic:baseline-home"/>
+      <Icon name="ic:baseline-link" />
       <a href=`https://${webpage}`>{webpage}</a>
     </li>
     <li>
       <Icon name="octicon:mark-github-24" />
-      <a href=`https://github.com/${github}`>GitHub</a>
+      <a href=`https://github.com/${github}`>@{github}</a>
     </li>
-    <li>
+    <li class="no-print">
       <Icon name="google-scholar-square"/>
       <a href=`https://scholar.google.com/citations?user=${gscholar}` target="_blank">Google Scholar</a>
     </li>
-    <li>
+    <li class="no-print">
       <Icon name="orcid"/>
       <a href=`https://orcid.org/${orcid}` target="_blank">ORCID</a>
     </li>
@@ -33,8 +33,11 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
 
 <style>
   @reference "../styles/common.css";
-  li {@apply flex flex-row items-center space-x-2 text-zinc-600 dark:text-zinc-500;}
-  svg {@apply w-4 h-4;}
-  a, span {@apply text-zinc-800 dark:text-zinc-300 text-sm;}
-  a {@apply hover:text-zinc-900 hover:dark:text-zinc-200 hover:underline;}
+  @layer base {
+    li {@apply flex flex-row items-center space-x-2 print:space-x-1 text-zinc-600 dark:text-zinc-500;}
+    li.no-print {@apply print:hidden;}
+    svg {@apply w-4 h-4;}
+    a, span {@apply text-zinc-800 dark:text-zinc-300 print:text-zinc-800 text-sm;}
+    a {@apply hover:text-zinc-900 hover:dark:text-zinc-200 hover:underline;}
+  }
 </style>

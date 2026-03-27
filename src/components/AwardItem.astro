@@ -2,14 +2,16 @@
 import Date from '../components/Date.astro';
 const { title, inst, desc, dateStart, dateEnd, ...attrs } = Astro.props;
 ---
-<li class="sm:flex sm:flex-row items-start justify-between mb-4">
-  <div class="sm:mr-4">
+<li class="mb-el">
+  <div class="sm:flex sm:flex-row items-start justify-between space-x-2">
     <p>{title}</p>
+    <Date
+      dateStart={dateStart}
+      dateEnd={dateEnd}
+    />
+  </div>
+  <div class="print:flex flex-row justify-between">
     <p class="acc1">{inst}</p>
     <p class="acc2">{desc}</p>
   </div>
-  <Date
-    dateStart={dateStart}
-    dateEnd={dateEnd}
-  />
 </li>

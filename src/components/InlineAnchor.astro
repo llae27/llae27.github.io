@@ -3,12 +3,14 @@ import { Icon } from 'astro-icon/components';
 const { href, target="_blank", text } = Astro.props;
 ---
 <a href={href} target={target}>
-    {text}<Icon name="ic:baseline-launch" class="inline" />
+    {text}<Icon name="ic:baseline-launch" class="inline print:hidden" />
 </a>
 
 <style>
   @reference "../styles/common.css";
-  a {
-    @apply text-zinc-800 dark:text-zinc-300 font-semibold hover:underline;
+  @layer base {
+    a {
+      @apply text-zinc-800 dark:text-zinc-300 print:text-inherit font-semibold print:font-normal hover:underline;
+    }
   }
 </style>
