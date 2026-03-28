@@ -66,6 +66,11 @@
     @apply text-zinc-800 dark:text-zinc-300 print:text-inherit font-semibold print:font-normal hover:underline;
   }
 
+  ul.workdesc a::after {
+    content: url("../icons/launch.svg");
+    @apply align-middle;
+  }
+
   @media print {
     html {
       font-size: 12pt;
