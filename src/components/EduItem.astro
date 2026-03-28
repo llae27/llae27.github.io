@@ -9,17 +9,21 @@ const { school, address, admitDate, gradDate = "Current", program, dept, advisor
       dateStart={admitDate}
       dateEnd={gradDate}
     />
-    <div class="col-start-2 col-end-5 sm:flex flex-row items-center space-x-1">
+    <div class="col-start-2 col-end-5 md:flex print:flex flex-row items-center space-x-1">
       <p class="font-semibold">{program}</p>
-      <p class="acc1">(Advisor: {advisor})</p>
+      {advisor && (
+        <p class="acc1">(Advisor: {advisor})</p>
+      )}
     </div>
   </div>
   <div class="col-start-2 col-end-5">
     <div class="print:flex print:flex-row items-center">
       <p class="acc1">{dept}</p>
-      <p class="acc2">{school}, {address}</p>
+      <p class="acc2 school">{school}, {address}</p>
     </div>
-    <p class="acc2">Overall GPA: {gpa}; Major GPA: {gpaMajor}</p>
+    {(gpa || gpaMajor) && (
+      <p class="acc2">{gpa && `Overall GPA: ${gpa}`}{(gpa && gpaMajor) && '; '}{gpaMajor && `Major GPA: ${gpaMajor}`}</p>
+    )}
   </div>
 </li>
 
@@ -30,7 +34,7 @@ const { school, address, admitDate, gradDate = "Current", program, dept, advisor
     li.grid-4 {@apply print:block;}
     div.grid-4 {@apply print:flex print:flex-row-reverse;}
     @media print {
-      p.acc2::before {content: ", ";}
+      p.school::before {content: ", ";}
     }
   }
 </style>

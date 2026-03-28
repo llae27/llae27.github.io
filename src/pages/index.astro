@@ -8,23 +8,25 @@ import TeachList from '../components/TeachList.astro';
 import WorkList from '../components/WorkList.astro';
 import SkillList from '../components/SkillList.astro';
 
-const title = "CV | Yourae Shin";
+const title = "CV | Yourae Shin"; // EDIT: YOUR WEBPAGE TITLE
 ---
 <BaseLayout title={title}>
   <section class="mt-sec">
+    {// EDIT: ABOUT YOU}
     <h1 id="about" class="print:text-center">503 Service Unavailable</h1>
     <p class="print:text-center">This Curriculum Vitae is under construction. Please proceed with caution.</p>
     <ContactList
-      email="yshin062@ucr.edu"
-      github="llae27"
-      webpage="llae27.github.io"
-      orcid="0000-0002-3274-726X"
-      gscholar="fpwim2IAAAAJ"
+      email="yshin062@ucr.edu" // EDIT: EMAIL
+      github="llae27" // EDIT: GITHUB
+      webpage="llae27.github.io" // EDIT: WEBPAGE
+      orcid="0000-0002-3274-726X" //EDIT: ORCID
+      gscholar="fpwim2IAAAAJ" //EDIT: GOOGLE SCHOLAR
     />
   </section>
   <section class="mt-sec">
     <h2 id="education">Education</h2>
     <ul>
+      {// EDIT}
       <EduItem
         school="University of California, Riverside"
         address="Riverside, California"
@@ -62,26 +64,30 @@ const title = "CV | Yourae Shin";
 
   <section class="mt-sec">
     <h2 id="publications">Publications</h2>
+    {// EDIT: components/PubList.astro}
     <PubList />
   </section>
 
   <section class="mt-sec">
     <h2 id="work">Research Experience</h2>
+    {// EDIT: components/WorkList.astro}
     <WorkList />
   </section>
 
   <section class="mt-sec">
     <h2 id="teaching">Teaching Experience</h2>
+    {// EDIT: components/TeachList.astro}
     <TeachList />
   </section>
 
   <section class="mt-sec">
     <h2 id="awards">Awards and Scholarships</h2>
     <ul>
+      {// EDIT}
       <AwardItem
         title="Dean's Distinguished Award"
         inst="University of California, Riverside"
-        addr="Riverside, California"
+        address="Riverside, California"
         dateStart="2024-09-23"
         dateEnd="2025-06-13"
         desc="Full tuition and stipend"
@@ -89,14 +95,14 @@ const title = "CV | Yourae Shin";
       <AwardItem
         title="Brain Korea 21 Four Outstanding Paper Award"
         inst="National Research Foundation of Korea"
-        addr="Korea"
+        address="Korea"
         dateStart="2021-02-22"
         desc="Outstanding Paper Incentive"
       />
       <AwardItem
         title="Brain Korea 21 Four Scholarship"
         inst="National Research Foundation of Korea"
-        addr="Korea"
+        address="Korea"
         dateStart="2020-09-01"
         dateEnd="2021-12-31"
         desc="Full tuition"
@@ -104,7 +110,7 @@ const title = "CV | Yourae Shin";
       <AwardItem
         title="The Presidential Science Scholarship"
         inst="Korea Student Aid Foundation"
-        addr="Korea"
+        address="Korea"
         dateStart="2015-03-02"
         dateEnd="2019-12-31"
         desc="Full tuition and stipend"
@@ -114,6 +120,7 @@ const title = "CV | Yourae Shin";
   
   <section class="mt-sec">
     <h2 id="skills">Skills</h2>
+    {// EDIT: components/SkillList.astro}
     <SkillList />
   </section>
 </BaseLayout>

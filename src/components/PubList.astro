@@ -1,9 +1,6 @@
 ---
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { Cite } from '@citation-js/core';
-import '@citation-js/plugin-bibtex';
-import '@citation-js/plugin-csl';
 import PubItem from '../components/PubItem.astro';
 
 const orcidId = import.meta.env.ORCID_ID;
@@ -11,16 +8,11 @@ const clientId = import.meta.env.ORCID_CLIENT_ID;
 const clientSecret = import.meta.env.ORCID_CLIENT_SECRET;
 const apiUrl = import.meta.env.ORCID_API_URL;
 
-// ORCID override
+// EDIT: ORCID OVERRIDES
 const orcidOverrides = {
   // putcode as a key
   '144996575': {
     award: 'BK21 Four Outstanding Paper Award',
-    authors: {
-      'Yoo JY': 'first',
-      'Hyeon DY': 'first',
-      'Shin Y': 'first'
-    },
     first: 3,
   }
 };
@@ -55,47 +47,12 @@ try {
   await fs.mkdir(path.dirname(CACHE_PATH), { recursive: true });
 }
 
-function formatApa (bibtex, first = 1) {
-  const cite = new Cite(bibtex.replace(/\s+/g, ' ').trim());
-  const nameRegex = new RegExp(`(Shin, Y\\.|Y\\. Shin)`, 'g');
-  // Output as APA Style HTML
-  let count = 0;
-  const citeApa = cite.format('bibliography', {
-    template: 'apa',
-    format: 'html',
-    lang: 'en-US'
-  }).replace(/\., /g, (match) => {
-    count++;
-    return count <= first ? ".*, " : match;
-  }).replace(nameRegex, `<strong>$1</strong>`);
-  return citeApa
-}
-
 const publications = await Promise.all(
   rawData.group.map(async (group) => {
     const work = group['work-summary'][0];
     if (!work) return null;
 
-    // get authors
     const putCode = work['put-code'];
-    const detailRes = await fetch(`${apiUrl}/${orcidId}/work/${putCode}`, {
-      headers: { 'Authorization': `Bearer ${access_token}`, 'Accept': 'application/json' }
-    });
-    const detail = await detailRes.json();
-    const contributors = detail['contributors']['contributor'] || [];
-    const authorList = contributors.map((c, index) => {
-      const name = c['credit-name']?.value;
-      const isFirst = index == 0 || orcidOverrides[putCode]?.authors?.[name] === 'first' || c['contributor-attributes']?.['contributor-sequence'] === 'first'; // it doesn't really work; require override
-      const isYou = name === "Yourae Shin" || name === "Shin Y" ;
-      // style
-      let displayName = name;
-      if (isFirst) displayName = `${displayName}*`;
-      if (isYou) displayName = `<strong>${displayName}</strong>`;
-      return displayName;
-    }).filter(Boolean).join(', ');
-
-    const first = orcidOverrides[putCode]?.first || 1;
-
     // get links
     const externalIds = work['external-ids']?.['external-id'] || [];
     const reducedIds = externalIds.reduce((acc, id) => {
@@ -123,17 +80,16 @@ const publications = await Promise.all(
 
     return {
       title: work.title.title.value,
-      authors: authorList || "Authors not listed",
       year: work['publication-date']?.year?.value || 'In Press',
-      month: work['publication-date']?.month?.value || 'N/A',
-      day: work['publication-date']?.day?.value || 'N/A',
+      month: work['publication-date']?.month?.value || '',
+      day: work['publication-date']?.day?.value || '',
       journal: work['journal-title']?.value || '',
       type: work.type.replace(/-/g, ' '),
       url: primaryUrl,
       externalIds: reducedIds,
-      award: orcidOverrides[putCode]?.award,
       bibtex: bibtex,
-      citeApa: formatApa(bibtex, first),
+      award: orcidOverrides[putCode]?.award,
+      first: orcidOverrides[putCode]?.first || 1,
     };
   }).sort((a, b) => b.year - a.year)
 ); // Sort by newest first
@@ -163,26 +119,12 @@ try {
 <h3 id="pub-presentation">Presentation</h3>
 <ul>
   <PubItem
-    title="A Cloud-based QC Platform for Comprehensive Examination of MS-based Proteomics Data"
-    authors="<strong>Yourae Shin</strong> <italic>et al.</italic>"
-    venue="Human Proteome Organization (HUPO) 2023 World Congress"
-    year="2023"
-    month="09"
-    address="Busan, Korea"
-    type="Poster"
     bibtex={manual['hupo2023']}
-    citeApa={formatApa(manual['hupo2023'])}
+    type="Poster"
   />
   <PubItem
-    title="MS-based Proteomics Reveals Exosomal Protein Biomarkers for Accurate Diagnosis of Cholangiocarcinoma"
-    authors="<strong>Yourae Shin</strong> <italic>et al.</italic>"
-    venue="Korean Society of Extracellular Vesicles"
-    year="2022"
-    month="11"
-    address="Jeju, Korea"
-    type="Poster"
     bibtex={manual['ksev2022']}
-    citeApa={formatApa(manual['ksev2022'])}
+    type="Poster"
   />
 </ul>
 

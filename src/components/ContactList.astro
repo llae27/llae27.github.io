@@ -8,26 +8,36 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
       <Icon title="It's sunny here" name="ic:baseline-wb-sunny" class="text-amber-400" />
       <span>Riverside, California</span>
     </li>
-    <li>
-      <Icon name="ic:baseline-email"/>
-      <a href=`mailto:${email}`>{email}</a>
-    </li>
-    <li>
-      <Icon name="ic:baseline-link" />
-      <a href=`https://${webpage}`>{webpage}</a>
-    </li>
-    <li>
-      <Icon name="octicon:mark-github-24" />
-      <a href=`https://github.com/${github}`>@{github}</a>
-    </li>
-    <li class="no-print">
-      <Icon name="google-scholar-square"/>
-      <a href=`https://scholar.google.com/citations?user=${gscholar}` target="_blank">Google Scholar</a>
-    </li>
-    <li class="no-print">
-      <Icon name="orcid"/>
-      <a href=`https://orcid.org/${orcid}` target="_blank">ORCID</a>
-    </li>
+    {email && (
+      <li>
+        <Icon name="ic:baseline-email"/>
+        <a href=`mailto:${email}`>{email}</a>
+      </li>
+    )}
+    {webpage && (
+      <li>
+        <Icon name="ic:baseline-link" />
+        <a href=`https://${webpage}`>{webpage}</a>
+      </li>
+    )}
+    {github && (
+      <li>
+        <Icon name="octicon:mark-github-24" />
+        <a href=`https://github.com/${github}`>@{github}</a>
+      </li>
+    )}
+    {gscholar && (
+      <li class="no-print">
+        <Icon name="google-scholar-square"/>
+        <a href=`https://scholar.google.com/citations?user=${gscholar}` target="_blank">Google Scholar</a>
+      </li>
+    )}
+    {orcid && (
+      <li class="no-print">
+        <Icon name="orcid"/>
+        <a href=`https://orcid.org/${orcid}` target="_blank">ORCID</a>
+      </li>
+    )}
   </ul>
 </div>
 

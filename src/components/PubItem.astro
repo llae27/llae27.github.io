@@ -1,33 +1,67 @@
 ---
 import { Icon } from 'astro-icon/components';
 import type { HTMLAttributes } from 'astro/types';
+import { Cite } from '@citation-js/core';
+import '@citation-js/plugin-bibtex';
+import '@citation-js/plugin-csl';
+
 interface Props extends HTMLAttributes<'p'> {
   year: string;
   month: string;
   day: string;
 }
-const { title, authors, journal, year, month, day, venue, address, url, type, externalIds, award, bibtex, citeApa, ...attrs } = Astro.props;
-const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
+
+// EDIT: YOUR NAME
+const yourName = "Yourae Shin";
+const yourNameRegex = new RegExp(`(Shin, Y\\.|Y\\. Shin)`, 'g');
+
+function formatApa (cite, first = 1) {
+  // Output as APA Style HTML
+  let count = 0;
+  const citeApa = cite.format('bibliography', {
+    template: 'apa',
+    format: 'html',
+    lang: 'en-US'
+  }).replace(/\., /g, (match) => {
+    count++;
+    return count <= first ? ".*, " : match;
+  }).replace(yourNameRegex, `<strong>$1</strong>`);
+  return citeApa
+}
+
+const { title, journal, year, month, day, address, url, externalIds, type, bibtex, award, first = 1 } = Astro.props;
+
+const cite = new Cite(bibtex.replace(/\s+/g, ' ').trim());
+const citeApa = formatApa(cite, first);
+
+const dateYear = year || cite.data?.[0]?.issued?.['date-parts']?.[0][0];
+const dateMonth = month || cite.data?.[0]?.issued?.['date-parts']?.[0][1];
+const date = day ? `${dateYear}-${dateMonth}-${day}` : `${dateYear}-${dateMonth}`;
+
+const authors = cite.data[0].author.map((a, idx) => {
+  const name = `${a.given} ${a.family}`;
+  const isFirst = idx < first ? '*' : '';
+  if (name === yourName) return `<strong>${name}${isFirst}</strong>`;
+  else return `${name}${isFirst}`;
+}).join(', ');
+
+const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.container-title || `${cite.data?.[0]?.publisher}, ${cite.data?.[0]?.['publisher-place']} (${type})` || '';
 ---
 
 <li class="sm:flex sm:flex-row items-start justify-between gap-x-4 mb-el print:list-item print:ml-4 print:mb-space">
   <div class="print:hidden">
     {url && (
       <a href={url} target="_blank">
-        <p class="title">{title}</p>
+        <p class="title">{title || cite.data?.[0]?.title}</p>
       </a>
     )}
     {!url && (
-      <p class="title">{title}</p>
+      <p class="title">{title || cite.data?.[0]?.title}</p>
     )}
     <p class="acc1" set:html={authors}></p>
     <div class="sm:flex flex-row items-center space-x-2">
       <div class="flex flex-row items-center space-x-2">
-        <p class="acc2">
-          {journal}
-          {type === 'preprint' && ('Preprint')}
-          {venue && (`${venue}, ${address} (${type})`)}
-        </p>
+        <p class="acc2">{venue}</p>
         <ul class="flex flex-row items-center space-x-2">
           {externalIds?.doi && (
             <li>
@@ -77,7 +111,7 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
       )}
     </div>
   </div>
-  <p title={date} class="acc1 print:hidden">{year}</p>
+  <p title={date} class="acc1 print:hidden">{dateYear}</p>
   <div class="text-sm hidden print:block" set:html={citeApa}></div>
 </li>
 
