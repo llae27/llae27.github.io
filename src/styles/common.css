@@ -62,6 +62,10 @@
     @apply italic;
   }
 
+  ul.workdesc a {
+    @apply text-zinc-800 dark:text-zinc-300 print:text-inherit font-semibold print:font-normal hover:underline;
+  }
+
   @media print {
     html {
       font-size: 12pt;

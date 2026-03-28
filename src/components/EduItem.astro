@@ -1,13 +1,13 @@
 ---
 import Date from '../components/Date.astro';
-const { school, address, admitDate, gradDate = "Current", program, dept, advisor, gpa, gpaMajor } = Astro.props;
+const { school, address, dateStart, dateEnd = "Current", program, dept, advisor, gpa, gpaMajor } = Astro.props;
 ---
 
 <li class="grid-4 mb-el">
   <div class="col-span-full grid-4">
     <Date
-      dateStart={admitDate}
-      dateEnd={gradDate}
+      dateStart={dateStart}
+      dateEnd={dateEnd}
     />
     <div class="col-start-2 col-end-5 md:flex print:flex flex-row items-center space-x-1">
       <p class="font-semibold">{program}</p>

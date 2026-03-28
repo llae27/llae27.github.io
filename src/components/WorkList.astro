@@ -1,90 +1,40 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
 import WorkItem from '../components/WorkItem.astro';
 import InlineAnchor from '../components/InlineAnchor.astro';
----
-<h3 id="work-prof">Professional</h3>
-<ul>
-  <WorkItem
-    job="Assistant research engineer"
-    team="Bioinformatics Team"
-    company="Biomarker Research Institute (BRI), Bertis"
-    address="Gyeonggi-do, Korea"
-    dateStart="2022-06-27"
-    dateEnd="2024-06-30"
-  >
-    <ul class="workdesc">
-      <li>
-        <p>Led diagnostic biomarker discovery based on systematic analysis of untargeted plasma proteome profiles in cholangiocarcinoma and prostate cancer.</p>
-      </li>
-      <li>
-        <p>Led single-cell level untargeted proteomics analysis on HeLa cell lysate for single-cell proteomics analysis workflow standardization.</p>
-      </li>
-      <li>
-        <p>Automated untargeted proteomics analysis and developed visualization platform for <InlineAnchor href="https://www.bertis.com/down/[Bertis]%20PASS%20Brochure_2403.pdf" text="commercial proteomics solution service" />.</p>
-      </li>
-    </ul>
-  </WorkItem>
-</ul>
 
-<h3 id="work-intern">Internships</h3>
-<ul>
-  <WorkItem
-    job="Graduate Student Researcher"
-    team="Division of Clinical Bioinformatics (Advisor: Kwangsoo Kim)"
-    company="Seoul National University Hospital"
-    address="Seoul, Korea"
-    dateStart="2020-05-01"
-    dateEnd="2021-05-30"
-  >
-    <ul class="workdesc">
-      <li>
-        <p>Led statistical analysis for longitudinal HbA1c prediction in type II diabetes cohort (n=55,602) based on electronic medical records (EMR) collected at SNUH from 2004 to 2020.</p>
-      </li>
-    </ul>
-  </WorkItem>
-  <WorkItem
-    job="Undergraduate Student Researcher"
-    team="Systems Biology and Medicine (SBM) Lab (Advisor: Daehee Hwang)"
-    company="Seoul National University"
-    address="Seoul, Korea"
-    dateStart="2019-05-01"
-    dateEnd="2019-12-30"
-  >
-    <ul class="workdesc">
-      <li>
-        <p>Led transcriptomic analysis and biological pathway enrichment analysis to discover novel upstream regulator in Arabidopsis thaliana vernalization model (Jeong, G., et al. 2026).</p>
-      </li>
-    </ul>
-  </WorkItem>
-  <WorkItem
-    job="Undergraduate Student Researcher"
-    team="Veterinary Anatomy Lab (Advisor: Junpei Kimura)"
-    company="Seoul National University"
-    address="Seoul, Korea"
-    dateStart="2019-07-01"
-    dateEnd="2019-08-31"
-  >
-    <ul class="workdesc">
-      <li>
-        <p>X-ray image processing for the 3D visualization of bat inner ear bone structures.</p>
-      </li>
-    </ul>
-  </WorkItem>
-  <WorkItem
-    job="Undergraduate Student Researcher"
-    team="Neurophysiology Lab (Advisor: Sukwoo Choi)"
-    company="Seoul National University"
-    address="Seoul, Korea"
-    dateStart="2018-07-01"
-    dateEnd="2018-08-31"
-  >
-    <ul class="workdesc">
-      <li>
-        <p>Practiced experimental skills including perfusion, cryosection, and immunostaining in rodent model.</p>
-      </li>
-    </ul>
-  </WorkItem>
-</ul>
+const entry = await getCollection('work');
+if (!entry) { console.error(entry); }
+---
+{entry[0]?.data?.sections?.map((section) => (
+  <section class="mt-sec">
+    <h2 id={section.id}>{section.title}</h2>
+    {section.sections?.map((subsection) => (
+      <h3 id={subsection.id}>{subsection.title}</h3>
+      <ul>
+      {subsection.items.map((item) => (
+        <WorkItem
+          job={item.job}
+          team={item.team}
+          advisor={item.advisor}
+          company={item.company}
+          address={item.address}
+          dateStart={item.dateStart}
+          dateEnd={item.dateEnd}
+        >
+        {item.description && (
+          <ul class="workdesc">
+            {item.description.map((d) => (
+              <li><p set:html={d}></p></li>
+            ))}
+          </ul>
+        )}
+        </WorkItem>
+      ))}
+      </ul>
+    ))}
+  </section>
+))}
 
 <style>
   @reference "../styles/common.css";

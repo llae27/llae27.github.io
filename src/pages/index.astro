@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactList from '../components/ContactList.astro';
 import PubList from '../components/PubList.astro';
-import EduItem from '../components/EduItem.astro';
+import EduList from '../components/EduList.astro';
 import AwardItem from '../components/AwardItem.astro';
 import TeachList from '../components/TeachList.astro';
 import WorkList from '../components/WorkList.astro';
+import AwardList from '../components/AwardList.astro';
 import SkillList from '../components/SkillList.astro';
 
 const title = "CV | Yourae Shin"; // EDIT: YOUR WEBPAGE TITLE
@@ -23,44 +24,8 @@ const title = "CV | Yourae Shin"; // EDIT: YOUR WEBPAGE TITLE
       gscholar="fpwim2IAAAAJ" //EDIT: GOOGLE SCHOLAR
     />
   </section>
-  <section class="mt-sec">
-    <h2 id="education">Education</h2>
-    <ul>
-      {// EDIT}
-      <EduItem
-        school="University of California, Riverside"
-        address="Riverside, California"
-        admitDate="2024-09-20"
-        program="Doctor of Philosophy in Computer Science"
-        dept="Department of Computer Science and Engineering"
-        advisor="Mingxun Wang"
-        gpa="4.0/4.0"
-        gpaMajor="4.0/4.0"
-      />
-      <EduItem
-        school="Seoul National University"
-        address="Seoul, Korea"
-        admitDate="2020-03-02"
-        gradDate="2022-02-25"
-        program="Master of Science in Biological Science"
-        dept="School of Biological Science"
-        advisor="Daehee Hwang"
-        gpa="4.15/4.30 (4.0/4.0)"
-        gpaMajor="4.15/4.30 (4.0/4.0)"
-      />
-      <EduItem
-        school="Seoul National University"
-        address="Seoul, Korea"
-        admitDate="2015-03-02"
-        gradDate="2020-02-26"
-        program="Bachelor of Science in Biological Science"
-        dept="School of Biological Science"
-        advisor="Daehee Hwang"
-        gpa="3.61/4.30 (3.56/4.0)"
-        gpaMajor="3.54/4.30 (3.51/4.0)"
-      />
-    </ul>
-  </section>
+
+  <EduList />
 
   <section class="mt-sec">
     <h2 id="publications">Publications</h2>
@@ -68,55 +33,9 @@ const title = "CV | Yourae Shin"; // EDIT: YOUR WEBPAGE TITLE
     <PubList />
   </section>
 
-  <section class="mt-sec">
-    <h2 id="work">Research Experience</h2>
-    {// EDIT: components/WorkList.astro}
-    <WorkList />
-  </section>
+  <WorkList />
 
-  <section class="mt-sec">
-    <h2 id="teaching">Teaching Experience</h2>
-    {// EDIT: components/TeachList.astro}
-    <TeachList />
-  </section>
-
-  <section class="mt-sec">
-    <h2 id="awards">Awards and Scholarships</h2>
-    <ul>
-      {// EDIT}
-      <AwardItem
-        title="Dean's Distinguished Award"
-        inst="University of California, Riverside"
-        address="Riverside, California"
-        dateStart="2024-09-23"
-        dateEnd="2025-06-13"
-        desc="Full tuition and stipend"
-      />
-      <AwardItem
-        title="Brain Korea 21 Four Outstanding Paper Award"
-        inst="National Research Foundation of Korea"
-        address="Korea"
-        dateStart="2021-02-22"
-        desc="Outstanding Paper Incentive"
-      />
-      <AwardItem
-        title="Brain Korea 21 Four Scholarship"
-        inst="National Research Foundation of Korea"
-        address="Korea"
-        dateStart="2020-09-01"
-        dateEnd="2021-12-31"
-        desc="Full tuition"
-      />
-      <AwardItem
-        title="The Presidential Science Scholarship"
-        inst="Korea Student Aid Foundation"
-        address="Korea"
-        dateStart="2015-03-02"
-        dateEnd="2019-12-31"
-        desc="Full tuition and stipend"
-      />
-    </ul>
-  </section>
+  <AwardList />
   
   <section class="mt-sec">
     <h2 id="skills">Skills</h2>

@@ -1,6 +1,6 @@
 ---
 import Date from '../components/Date.astro';
-const { title, inst, address, desc, dateStart, dateEnd, ...attrs } = Astro.props;
+const { title, inst, address, description, dateStart, dateEnd } = Astro.props;
 ---
 <li class="mb-el">
   <div class="sm:flex sm:flex-row items-start justify-between space-x-2">
@@ -12,8 +12,8 @@ const { title, inst, address, desc, dateStart, dateEnd, ...attrs } = Astro.props
   </div>
   <div class="print:flex flex-row justify-between">
     <p class="acc1">{inst}, {address}</p>
-    {desc && (
-      <p class="acc2">{desc}</p>
+    {description && (
+      <p class="acc2">{description}</p>
     )}
   </div>
 </li>

@@ -1,0 +1,25 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import EduItem from '../components/EduItem.astro';
+
+const entry = await getCollection('edu');
+if (!entry) { console.error(entry); }
+---
+<section class="mt-sec">
+  <h2 id={entry[0].id}>{entry[0].data.title}</h2>
+  <ul>
+  {entry?.[0].data.items?.map((item) => (
+    <EduItem
+      program={item.program}
+      dept={item.dept}
+      advisor={item.advisor}
+      school={item.school}
+      address={item.address}
+      dateStart={item.dateStart}
+      dateEnd={item.dateEnd}
+      gpa={item.gpa}
+      gpaMajor={item.gpaMajor}
+    />
+  ))}
+  </ul>
+</section>

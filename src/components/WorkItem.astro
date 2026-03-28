@@ -1,6 +1,6 @@
 ---
 import Date from '../components/Date.astro';
-const { company, address, dateStart, dateEnd = "Current", job, team } = Astro.props;
+const { company, address, dateStart, dateEnd = "Current", job, team, advisor } = Astro.props;
 ---
 
 <li class="mb-el">
@@ -12,7 +12,10 @@ const { company, address, dateStart, dateEnd = "Current", job, team } = Astro.pr
         dateEnd={dateEnd}
       />
     </div>
-    <p class="acc1">{team}</p>
+    <p class="acc1">
+      {team}
+      {advisor && `(Advisor: ${advisor})`}
+    </p>
     <p class="acc2">{company}, {address}</p>
   </div>
   <slot />
