@@ -1,143 +1,25 @@
 ---
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { getCollection, getEntry } from 'astro:content';
 import PubItem from '../components/PubItem.astro';
 
-const orcidId = import.meta.env.ORCID_ID;
-const clientId = import.meta.env.ORCID_CLIENT_ID;
-const clientSecret = import.meta.env.ORCID_CLIENT_SECRET;
-const apiUrl = import.meta.env.ORCID_API_URL;
-
-// EDIT: ORCID OVERRIDES
-const orcidOverrides = {
-  // putcode as a key
-  '144996575': {
-    award: 'BK21 Four Outstanding Paper Award',
-    first: 3,
-  }
-};
-
-const tokenResponse = await fetch('https://orcid.org/oauth/token', {
-  method: 'POST',
-  headers: { 'Accept': 'application/json' },
-  body: new URLSearchParams({
-    client_id: clientId,
-    client_secret: clientSecret,
-    grant_type: 'client_credentials',
-    scope: '/read-public'
-  })
-});
-const { access_token } = await tokenResponse.json();
-
-const worksResponse = await fetch(`${apiUrl}/${orcidId}/works`, {
-  headers: {
-    'Authorization': `Bearer ${access_token}`,
-    'Accept': 'application/json'
-  }
-});
-const rawData = await worksResponse.json();
-
-// let's cache
-const CACHE_PATH = path.join(process.cwd(), 'src/cache/bibtex.json');
-let cache = {};
-try {
-  const data = await fs.readFile(CACHE_PATH, 'utf-8');
-  cache = JSON.parse(data);
-} catch (e) {
-  await fs.mkdir(path.dirname(CACHE_PATH), { recursive: true });
-}
-
-const publications = await Promise.all(
-  rawData.group.map(async (group) => {
-    const work = group['work-summary'][0];
-    if (!work) return null;
-
-    const putCode = work['put-code'];
-    // get links
-    const externalIds = work['external-ids']?.['external-id'] || [];
-    const reducedIds = externalIds.reduce((acc, id) => {
-      const type = id['external-id-type'];
-      const value = id['external-id-value'];
-      const url = id['external-id-url']?.value;
-      
-      // We store the value and the URL for each ID type
-      acc[type] = { value, url };
-      return acc;
-    }, {});
-    const primaryUrl = reducedIds.doi?.url || reducedIds.arxiv?.url || externalIds[0]?.['external-id-url']?.value || "#";
-
-    // get bibtex
-    let bibtex;
-    if (cache[reducedIds.doi.value]) bibtex = cache[reducedIds.doi.value];
-    else {
-      const bibtexRes = await fetch(`https://doi.org/${reducedIds.doi.value}`, {
-        headers: { 'Accept': 'application/x-bibtex' }
-      });
-      bibtex = await bibtexRes.text();
-      cache[reducedIds.doi.value] = bibtex;
-      await fs.writeFile(CACHE_PATH, JSON.stringify(cache, null, 2));
-    }
-
-    return {
-      title: work.title.title.value,
-      year: work['publication-date']?.year?.value || 'In Press',
-      month: work['publication-date']?.month?.value || '',
-      day: work['publication-date']?.day?.value || '',
-      journal: work['journal-title']?.value || '',
-      type: work.type.replace(/-/g, ' '),
-      url: primaryUrl,
-      externalIds: reducedIds,
-      bibtex: bibtex,
-      award: orcidOverrides[putCode]?.award,
-      first: orcidOverrides[putCode]?.first || 1,
-    };
-  }).sort((a, b) => b.year - a.year)
-); // Sort by newest first
-
-// let's cache
-const MANUAL_PATH = path.join(process.cwd(), 'src/cache/manual.json');
-let manual;
-try {
-  const data = await fs.readFile(MANUAL_PATH, 'utf-8');
-  manual = JSON.parse(data);
-} catch (e) {
-}
+const entry = await getCollection('publication');
+if (!entry) { console.error(entry); }
 ---
 
-<h3 id="pub-journal">Journal</h3>
-<ul>
-  {publications.map((pubItem) => {
-    if (pubItem.type == "preprint") return;
-    return (
-      <PubItem
-        {...pubItem}
-      />
-    )
-  })}
-</ul>
-
-<h3 id="pub-presentation">Presentation</h3>
-<ul>
-  {manual.map((manualItem) => {
-    return (
-      <PubItem
-        {...manualItem}
-      />
-    )
-  })}
-</ul>
-
-<h3 id="pub-preprint">Preprint</h3>
-<ul>
-  {publications.map((pubItem) => {
-    if (pubItem.type != "preprint") return;
-    return (
-      <PubItem
-        {...pubItem}
-      />
-    )
-  })}
-</ul>
+{entry && (
+  <>
+  <h3 id={entry[0].id}>{entry[0].data.title}</h3>
+  <ul>
+    {entry[0].data.items.map((item) => {
+      return (
+        <PubItem
+          {...item}
+        />
+      )
+    })}
+  </ul>
+  </>
+)}
 
 <style>
   @reference "../styles/common.css";

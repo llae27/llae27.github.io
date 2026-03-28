@@ -19,11 +19,11 @@ sections:
         address: "Korea"
         dateStart: "2020-09-01"
         dateEnd: "2021-12-31"
-        desc: "Full tuition"
+        description: "Full tuition"
       - title: "The Presidential Science Scholarship"
         inst: "Korea Student Aid Foundation"
         address: "Korea"
         dateStart: "2015-03-02"
         dateEnd: "2019-12-31"
-        desc: "Full tuition and stipend"
+        description: "Full tuition and stipend"
 ---

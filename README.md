@@ -1,21 +1,27 @@
-# Astro Starter Kit: Minimal
+# Astro CV Starter Kit: Minimal
 
-```sh
-npm create astro@latest -- --template minimal
-```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
 /
 ├── public/
 ├── src/
-│   └── pages/
-│       └── index.astro
+│   ├── cache/
+│   ├── components/
+│   ├── content/                # EDIT CONTENTS HERE!
+│   │   ├── about.astro         # - introduction, contact
+│   │   ├── award.astro         # - awards, scholarship
+│   │   ├── edu.astro           # - education
+│   │   ├── orcid.astro         # - ORCID override
+│   │   ├── publication.astro   # - manual publications
+│   │   └── work.astro          # - work experience
+│   ├── icons/
+│   ├── layouts/
+│   ├── pages/
+│   │   └── index.astro
+│   ├── styles/
+│   └── content.config.ts       # you can edit schema here
+├── .env                        # SET ENVIRONMENTS HERE!
 └── package.json
 ```
 

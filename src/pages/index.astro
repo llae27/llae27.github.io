@@ -1,27 +1,29 @@
 ---
+import { getCollection, getEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactList from '../components/ContactList.astro';
+import ORCIDList from '../components/ORCIDList.astro';
 import PubList from '../components/PubList.astro';
 import EduList from '../components/EduList.astro';
-import AwardItem from '../components/AwardItem.astro';
-import TeachList from '../components/TeachList.astro';
 import WorkList from '../components/WorkList.astro';
 import AwardList from '../components/AwardList.astro';
 import SkillList from '../components/SkillList.astro';
 
-const title = "CV | Yourae Shin"; // EDIT: YOUR WEBPAGE TITLE
+const entry = await getCollection('about');
+if (!entry) { console.error(entry); }
+const data = entry[0].data;
+// get params
+const metatitle = data.metatitle;
 ---
-<BaseLayout title={title}>
+<BaseLayout metatitle={metatitle}>
   <section class="mt-sec">
-    {// EDIT: ABOUT YOU}
-    <h1 id="about" class="print:text-center">503 Service Unavailable</h1>
-    <p class="print:text-center">This Curriculum Vitae is under construction. Please proceed with caution.</p>
+    <div set:html={entry[0].rendered.html}></div>
     <ContactList
-      email="yshin062@ucr.edu" // EDIT: EMAIL
-      github="llae27" // EDIT: GITHUB
-      webpage="llae27.github.io" // EDIT: WEBPAGE
-      orcid="0000-0002-3274-726X" //EDIT: ORCID
-      gscholar="fpwim2IAAAAJ" //EDIT: GOOGLE SCHOLAR
+      email={data.email}
+      github={data.github}
+      webpage={data.webpage}
+      orcid={data.orcid}
+      gscholar={data.gscholar}
     />
   </section>
 
@@ -29,7 +31,7 @@ const title = "CV | Yourae Shin"; // EDIT: YOUR WEBPAGE TITLE
 
   <section class="mt-sec">
     <h2 id="publications">Publications</h2>
-    {// EDIT: components/PubList.astro}
+    <ORCIDList />
     <PubList />
   </section>
 
