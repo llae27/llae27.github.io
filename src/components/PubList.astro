@@ -1,4 +1,6 @@
 ---
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { Cite } from '@citation-js/core';
 import '@citation-js/plugin-bibtex';
 import '@citation-js/plugin-csl';
@@ -18,7 +20,8 @@ const orcidOverrides = {
       'Yoo JY': 'first',
       'Hyeon DY': 'first',
       'Shin Y': 'first'
-    }
+    },
+    first: 3,
   }
 };
 
@@ -42,6 +45,32 @@ const worksResponse = await fetch(`${apiUrl}/${orcidId}/works`, {
 });
 const rawData = await worksResponse.json();
 
+// let's cache
+const CACHE_PATH = path.join(process.cwd(), 'src/cache/bibtex.json');
+let cache = {};
+try {
+  const data = await fs.readFile(CACHE_PATH, 'utf-8');
+  cache = JSON.parse(data);
+} catch (e) {
+  await fs.mkdir(path.dirname(CACHE_PATH), { recursive: true });
+}
+
+function formatApa (bibtex, first = 1) {
+  const cite = new Cite(bibtex.replace(/\s+/g, ' ').trim());
+  const nameRegex = new RegExp(`(Shin, Y\\.|Y\\. Shin)`, 'g');
+  // Output as APA Style HTML
+  let count = 0;
+  const citeApa = cite.format('bibliography', {
+    template: 'apa',
+    format: 'html',
+    lang: 'en-US'
+  }).replace(/\., /g, (match) => {
+    count++;
+    return count <= first ? ".*, " : match;
+  }).replace(nameRegex, `<strong>$1</strong>`);
+  return citeApa
+}
+
 const publications = await Promise.all(
   rawData.group.map(async (group) => {
     const work = group['work-summary'][0];
@@ -62,9 +91,10 @@ const publications = await Promise.all(
       let displayName = name;
       if (isFirst) displayName = `${displayName}*`;
       if (isYou) displayName = `<strong>${displayName}</strong>`;
-
       return displayName;
     }).filter(Boolean).join(', ');
+
+    const first = orcidOverrides[putCode]?.first || 1;
 
     // get links
     const externalIds = work['external-ids']?.['external-id'] || [];
@@ -80,19 +110,16 @@ const publications = await Promise.all(
     const primaryUrl = reducedIds.doi?.url || reducedIds.arxiv?.url || externalIds[0]?.['external-id-url']?.value || "#";
 
     // get bibtex
-    const bibtexRes = await fetch(`https://doi.org/${reducedIds.doi.value}`, {
-      headers: { 'Accept': 'application/x-bibtex' }
-    });
-    const bibtex = await bibtexRes.text();
-
-    // Create a citation object
-    const cite = new Cite(bibtex.replace(/\s+/g, ' ').trim());
-    // Output as APA Style HTML
-    const citeApa = cite.format('bibliography', {
-      template: 'apa',
-      format: 'html',
-      lang: 'en-US'
-    });
+    let bibtex;
+    if (cache[reducedIds.doi.value]) bibtex = cache[reducedIds.doi.value];
+    else {
+      const bibtexRes = await fetch(`https://doi.org/${reducedIds.doi.value}`, {
+        headers: { 'Accept': 'application/x-bibtex' }
+      });
+      bibtex = await bibtexRes.text();
+      cache[reducedIds.doi.value] = bibtex;
+      await fs.writeFile(CACHE_PATH, JSON.stringify(cache, null, 2));
+    }
 
     return {
       title: work.title.title.value,
@@ -106,11 +133,19 @@ const publications = await Promise.all(
       externalIds: reducedIds,
       award: orcidOverrides[putCode]?.award,
       bibtex: bibtex,
-      citeApa: citeApa,
+      citeApa: formatApa(bibtex, first),
     };
   }).sort((a, b) => b.year - a.year)
 ); // Sort by newest first
 
+// let's cache
+const MANUAL_PATH = path.join(process.cwd(), 'src/cache/manual.json');
+let manual;
+try {
+  const data = await fs.readFile(MANUAL_PATH, 'utf-8');
+  manual = JSON.parse(data);
+} catch (e) {
+}
 ---
 
 <h3 id="pub-journal">Journal</h3>
@@ -135,6 +170,8 @@ const publications = await Promise.all(
     month="09"
     address="Busan, Korea"
     type="Poster"
+    bibtex={manual['hupo2023']}
+    citeApa={formatApa(manual['hupo2023'])}
   />
   <PubItem
     title="MS-based Proteomics Reveals Exosomal Protein Biomarkers for Accurate Diagnosis of Cholangiocarcinoma"
@@ -144,6 +181,8 @@ const publications = await Promise.all(
     month="11"
     address="Jeju, Korea"
     type="Poster"
+    bibtex={manual['ksev2022']}
+    citeApa={formatApa(manual['ksev2022'])}
   />
 </ul>
 
@@ -158,3 +197,10 @@ const publications = await Promise.all(
     )
   })}
 </ul>
+
+<style>
+  @reference "../styles/common.css";
+  @layer base {
+    ul {@apply print:list-decimal;}
+  }
+</style>

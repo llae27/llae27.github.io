@@ -1,6 +1,6 @@
 ---
 import Date from '../components/Date.astro';
-const { school, address, admitDate, gradDate = "Current", program, dept, advisor } = Astro.props;
+const { school, address, admitDate, gradDate = "Current", program, dept, advisor, gpa, gpaMajor } = Astro.props;
 ---
 
 <li class="grid-4 mb-el">
@@ -9,17 +9,17 @@ const { school, address, admitDate, gradDate = "Current", program, dept, advisor
       dateStart={admitDate}
       dateEnd={gradDate}
     />
-    <p class="col-start-2 col-end-5 font-semibold">{program}</p>
+    <div class="col-start-2 col-end-5 sm:flex flex-row items-center space-x-1">
+      <p class="font-semibold">{program}</p>
+      <p class="acc1">(Advisor: {advisor})</p>
+    </div>
   </div>
   <div class="col-start-2 col-end-5">
-    <div>
+    <div class="print:flex print:flex-row items-center">
       <p class="acc1">{dept}</p>
-      <p class="acc1 advisor">Advisor: {advisor}</p>
-    </div>
-    <div class="print:flex print:flex-row justify-between">
       <p class="acc2">{school}, {address}</p>
-      <p class="acc2">Overall GPA</p>
     </div>
+    <p class="acc2">Overall GPA: {gpa}; Major GPA: {gpaMajor}</p>
   </div>
 </li>
 
@@ -29,10 +29,8 @@ const { school, address, admitDate, gradDate = "Current", program, dept, advisor
     li.grid-4, div.grid-4 {@apply sm:grid grid-cols-4 gap-x-2 items-start justify-between;}
     li.grid-4 {@apply print:block;}
     div.grid-4 {@apply print:flex print:flex-row-reverse;}
-    p.acc1 {@apply print:inline;}
     @media print {
-      p.advisor::before {content: " (";}
-      p.advisor::after {content: ")";}
+      p.acc2::before {content: ", ";}
     }
   }
 </style>

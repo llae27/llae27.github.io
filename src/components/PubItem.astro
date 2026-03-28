@@ -6,11 +6,11 @@ interface Props extends HTMLAttributes<'p'> {
   month: string;
   day: string;
 }
-const { title, authors, journal, year, month, day, venue, address, url, type, externalIds, award, citeApa, ...attrs } = Astro.props;
+const { title, authors, journal, year, month, day, venue, address, url, type, externalIds, award, bibtex, citeApa, ...attrs } = Astro.props;
 const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
 ---
 
-<li class="sm:flex sm:flex-row items-start justify-between gap-x-4 mb-el">
+<li class="sm:flex sm:flex-row items-start justify-between gap-x-4 mb-el print:list-item print:ml-4 print:mb-space">
   <div class="print:hidden">
     {url && (
       <a href={url} target="_blank">
@@ -43,6 +43,30 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
               </a>
             </li>
           )}
+          {bibtex && (
+            <li 
+              x-data="{ 
+                copied: false, 
+                copy() { 
+                  navigator.clipboard.writeText($refs.bibContent.innerText);
+                  this.copied = true;
+                  setTimeout(() => this.copied = false, 2000);
+                }
+              }"
+              title="BibTex"
+              class="flex flex-row items-center space-x-1"
+            >
+              <pre x-ref="bibContent" class="hidden">{bibtex}</pre>
+              <a class="cursor-pointer" @click="copy()">
+                <Icon
+                  x-show="!copied"
+                  name="ic:baseline-account-balance"
+                />
+                <Icon class="text-green-600" x-show="copied" name="ic:baseline-check-circle"/>
+              </a>
+              <span class="text-green-600 text-sm" x-show="copied">Copied!</span>
+            </li>
+          )}
         </ul>
       </div>
       {award && (
@@ -54,7 +78,7 @@ const date = day ? `${year}-${month}-${day}` : `${year}-${month}`;
     </div>
   </div>
   <p title={date} class="acc1 print:hidden">{year}</p>
-  <div class="hidden text-sm print:block" set:html={citeApa}></div>
+  <div class="text-sm hidden print:block" set:html={citeApa}></div>
 </li>
 
 <style>

@@ -26,7 +26,7 @@
   }
 
   body {
-    @apply bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-200 font-sans leading-relaxed;
+    @apply bg-zinc-50 dark:bg-zinc-900 print:bg-white text-zinc-900 dark:text-zinc-200 font-sans leading-relaxed print:leading-tight;
     font-feature-settings: "prec", "tnum";
   }
 
@@ -75,5 +75,15 @@
       --margin-space: calc(var(--spacing) * 1);
       --padding-ls: calc(var(--spacing) * 1);
     }
+
+    @page {
+      @apply mb-16 align-top;
+
+      @bottom-center {
+        @apply font-serif text-sm;
+        content: counter(page) ' / ' counter(pages);
+      }
+    }
+
   }
 }

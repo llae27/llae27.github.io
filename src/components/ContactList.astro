@@ -10,7 +10,7 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
     </li>
     <li>
       <Icon name="ic:baseline-email"/>
-      <span>{email}</span>
+      <a href=`mailto:${email}`>{email}</a>
     </li>
     <li>
       <Icon name="ic:baseline-link" />

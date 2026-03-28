@@ -1,0 +1,11 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button
+  title="Print!"
+  @click="window.print()"
+  class="p-1 rounded text-zinc-500 bg-zinc-100 dark:text-zinc-600 dark:bg-zinc-950 cursor-pointer"
+>
+  <Icon name="ic:baseline-print" class="w-5 h-5" />
+</button>
