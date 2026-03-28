@@ -9,7 +9,7 @@ const { school, address, dateStart, dateEnd = "Current", program, dept, advisor,
       dateStart={dateStart}
       dateEnd={dateEnd}
     />
-    <div class="col-start-2 col-end-5 md:flex print:flex flex-row items-center space-x-1">
+    <div class="col-start-2 col-end-5 md:flex print:flex flex-row items-baseline space-x-1">
       <p class="font-semibold">{program}</p>
       {advisor && (
         <p class="acc1">(Advisor: {advisor})</p>
@@ -17,7 +17,7 @@ const { school, address, dateStart, dateEnd = "Current", program, dept, advisor,
     </div>
   </div>
   <div class="col-start-2 col-end-5">
-    <div class="print:flex print:flex-row items-center">
+    <div class="print:flex print:flex-row items-baseline">
       <p class="acc1">{dept}</p>
       <p class="acc2 school">{school}, {address}</p>
     </div>

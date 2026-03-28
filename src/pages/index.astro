@@ -8,6 +8,7 @@ import EduList from '../components/EduList.astro';
 import WorkList from '../components/WorkList.astro';
 import AwardList from '../components/AwardList.astro';
 import SkillList from '../components/SkillList.astro';
+import FunList from '../components/FunList.astro';
 
 const entry = await getCollection('about');
 if (!entry) { console.error(entry); }
@@ -39,9 +40,8 @@ const metatitle = data.metatitle;
 
   <AwardList />
   
-  <section class="mt-sec">
-    <h2 id="skills">Skills</h2>
-    {// EDIT: components/SkillList.astro}
-    <SkillList />
-  </section>
+  <SkillList />
+
+  <FunList />
+
 </BaseLayout>

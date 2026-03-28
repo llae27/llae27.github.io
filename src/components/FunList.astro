@@ -1,0 +1,89 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import Date from '../components/Date.astro';
+
+const entry = await getCollection('fun');
+if (!entry) { console.error(entry); }
+---
+
+<section class="mt-sec print:hidden">
+<h2 id={entry[0].id} set:html={entry[0].data.title}></h2>
+  <div class="sm:grid grid-cols-2 gap-x-4">
+    {entry[0].data.like && (
+      <div class="mb-el">
+        <p class="font-semibold mb-space" set:html={entry[0].data.like.title}></p>
+        <ul class="list-disc ml-4 text-zinc-600 dark:text-zinc-500">
+        {entry[0].data.like.items.map((item) => (
+          <li set:html={item}></li>
+        ))}
+        </ul>
+      </div>
+    )}
+    {entry[0].data.dislike && (
+      <div class="mb-el">
+        <p class="font-semibold mb-space" set:html={entry[0].data.dislike.title}></p>
+        <ul class="list-disc ml-4 text-zinc-600 dark:text-zinc-500">
+        {entry[0].data.dislike.items.map((item) => (
+          <li set:html={item}></li>
+        ))}
+        </ul>
+      </div>
+    )}
+  </div>
+{entry[0].data.sections.map((section) => (
+  <><h3 id={section.id} set:html={section.title}></h3>
+  <ul>
+    {section.items.map((item) => {
+      const date = item.day ? `${item.year}-${item.month}-${item.day}` : item.month ? `${item.year}-${item.month}` : item.year;
+      return (
+        <li class="sm:flex flex-row-reverse gap-x-4 justify-between mb-el">
+          <div class="flex-grow">
+            <div class="sm:flex flex-row gap-x-2 items-baseline">
+              <p>{item.title}</p>
+              <p class="acc1">{item.address}</p>
+            </div>
+            <div class="sm:flex flex-row gap-x-2 items-center">
+              <p class="acc2">{item.description}</p>
+              {item.record && (
+                <p class="flex flex-row items-center gap-x-1 text-sm text-amber-400">
+                  <Icon name="ic:baseline-timer" />
+                  <span>{item.record}</span>
+                </p>
+              )}
+            </div>
+            <ul class="sm:flex flex-row gap-x-2 items-center">
+              {item.award && (
+                <li class="flex flex-row gap-x-1 items-center text-sm text-yellow-500 dark:text-yellow-600">
+                  <Icon name="ic:baseline-emoji-events" />
+                  <span set:html={item.award}></span>
+                </li>
+              )}
+              {item.like && (
+                <li class="flex flex-row gap-x-1 items-center text-sm text-blue-400 dark:text-blue-600">
+                  <Icon name="ic:baseline-thumb-up" />
+                  <span set:html={item.like}></span>
+                </li>
+              )}
+              {item.dislike && (
+                <li class="flex flex-row gap-x-1 items-center text-sm text-rose-400 dark:text-rose-600">
+                  <Icon name="ic:baseline-thumb-down" />
+                  <span set:html={item.dislike}></span>
+                </li>
+              )}
+              {item.curious && (
+                <li class="flex flex-row gap-x-1 items-center text-sm text-lime-600 dark:text-lime-800">
+                  <Icon name="ic:baseline-contact-support" />
+                  <span set:html={item.curious}></span>
+                </li>
+              )}
+            </ul>
+          </div>
+          <Date dateStart={date} class="min-w-16 sm:text-right"/>
+        </li>
+      )
+    })}
+  </ul>
+  </>
+))}
+</section>

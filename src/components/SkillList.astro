@@ -3,18 +3,21 @@ import { getCollection, getEntry } from 'astro:content';
 const entry = await getCollection('skills');
 if (!entry) { console.error(entry); }
 ---
-{entry[0].data?.sections.map((section) => (
-  <><h3 id={section.id}>{section.title}</h3>
-  <ul class={section.title === 'Languages' ? 'sm:grid grid-cols-3 gap-x-2' : ''}>
-    {section.items.map((item) => (
-      <li>
-        <p>{item.title}</p>
-        <p class="acc1">{item.description}</p>
-      </li>
-    ))}
-  </ul>
-  </>
-))}
+<section class="mt-sec">
+  <h2 id="skills">Skills</h2>
+  {entry[0].data?.sections.map((section) => (
+    <><h3 id={section.id}>{section.title}</h3>
+    <ul class={section.title === 'Languages' ? 'sm:grid grid-cols-3 gap-x-2' : ''}>
+      {section.items.map((item) => (
+        <li>
+          <p>{item.title}</p>
+          <p class="acc1">{item.description}</p>
+        </li>
+      ))}
+    </ul>
+    </>
+  ))}
+</section>
 
 <style>
   @reference "../styles/common.css";

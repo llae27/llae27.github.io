@@ -4,7 +4,7 @@ interface Props extends HTMLAttributes<'span'> {
   dateStart: string;
   dateEnd: string;
 }
-const { dateStart, dateEnd } = Astro.props;
+const { dateStart, dateEnd, ...attr } = Astro.props;
 
 function formatDate(d) {
   // handle exceptions
@@ -20,8 +20,10 @@ function formatDate(d) {
   });
 }
 ---
-<p class="acc1">
-  <span class="whitespace-nowrap" title={dateStart}>{formatDate(dateStart)}</span>
-  {dateEnd ? '-' : ''}
-  <span class="whitespace-nowrap" title={dateEnd}>{formatDate(dateEnd)}</span>
-</p>
+<div {...attr}>
+  <p class="acc1 leading-[1.625rem] print:leading-[1.25rem]">
+    <span class="whitespace-nowrap" title={dateStart}>{formatDate(dateStart)}</span>
+    {dateEnd ? '-' : ''}
+    <span class="whitespace-nowrap" title={dateEnd}>{formatDate(dateEnd)}</span>
+  </p>
+</div>

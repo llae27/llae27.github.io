@@ -127,5 +127,39 @@ const skills = defineCollection({
   }),
 });
 
+const fun = defineCollection({
+  // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content', pattern: 'fun.md' }),
+  schema: z.object({
+    title: z.string(),
+    id: z.string(),
+    like: z.object({
+      title: z.string(),
+      items: z.array(z.string())
+    }).optional(),
+    dislike: z.object({
+      title: z.string(),
+      items: z.array(z.string())
+    }).optional(),
+    sections: z.array(z.object({
+      title: z.string(),
+      id: z.string(),
+      items: z.array(z.object({
+        title: z.string(),
+        year: z.int().optional(),
+        month: z.int().optional(),
+        day: z.int().optional(),
+        address: z.string().optional(),
+        record: z.string().optional(),
+        description: z.string(),
+        like: z.string().optional(),
+        dislike: z.string().optional(),
+        curious: z.string().optional(),
+        award: z.string().optional(),
+      })),
+    })).optional(),
+  }),
+});
+
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { about, edu, publication, orcid, work, award, skills };
+export const collections = { about, edu, publication, orcid, work, award, skills, fun };

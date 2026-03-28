@@ -1,9 +1,10 @@
+@import url('https://cdn.jsdelivr.net/gh/toss/tossface/dist/tossface.css');
 @import "tailwindcss";
 @source "../../src/**/*.astro";
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-sans: "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-sans: "Pretendard Variable", Tossface, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-serif: "Times New Roman", "Times", "STTime", "Baskerville", "Georgia", serif;
   --margin-sec: calc(var(--spacing) * 12);
   --margin-ls: calc(var(--spacing) * 6);
