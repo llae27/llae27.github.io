@@ -23,7 +23,7 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
     {github && (
       <li>
         <Icon name="octicon:mark-github-24" />
-        <a href=`https://github.com/${github}`>@{github}</a>
+        <a href=`https://github.com/${github}` target="_blank">@{github}</a>
       </li>
     )}
     {gscholar && (

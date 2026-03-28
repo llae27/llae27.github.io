@@ -12,8 +12,10 @@ interface Props extends HTMLAttributes<'p'> {
 }
 
 // EDIT: YOUR NAME
-const yourName = "Yourae Shin";
-const yourNameRegex = new RegExp(`(Shin, Y\\.|Y\\. Shin)`, 'g');
+const yourFirstName = "Yourae";
+const yourLastName = "Shin";
+const yourName = `${yourFirstName} ${yourLastName}`;
+const yourNameRegex = new RegExp(`(${yourLastName}, ${yourFirstName.slice(0,1)}\\.|${yourFirstName.slice(0,1)}\\. ${yourLastName})`, 'g');
 
 function formatApa (cite, first = 1) {
   // Output as APA Style HTML

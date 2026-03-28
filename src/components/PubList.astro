@@ -118,14 +118,13 @@ try {
 
 <h3 id="pub-presentation">Presentation</h3>
 <ul>
-  <PubItem
-    bibtex={manual['hupo2023']}
-    type="Poster"
-  />
-  <PubItem
-    bibtex={manual['ksev2022']}
-    type="Poster"
-  />
+  {manual.map((manualItem) => {
+    return (
+      <PubItem
+        {...manualItem}
+      />
+    )
+  })}
 </ul>
 
 <h3 id="pub-preprint">Preprint</h3>
