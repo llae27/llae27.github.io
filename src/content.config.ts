@@ -112,5 +112,20 @@ const award = defineCollection({
   }),
 });
 
+const skills = defineCollection({
+  // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content', pattern: 'skills.md' }),
+  schema: z.object({
+    sections: z.array(z.object({
+      title: z.string(),
+      id: z.string(),
+      items: z.array(z.object({
+        title: z.string(),
+        description: z.string(),
+      })),
+    })),
+  }),
+});
+
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { about, edu, publication, orcid, work, award };
+export const collections = { about, edu, publication, orcid, work, award, skills };

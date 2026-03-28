@@ -1,33 +1,20 @@
-<h3 id="sk-tech">Technical Expertise</h2>
-<ul>
-  <li>
-    <p>Multi-omics Analysis</p>
-    <p class="acc1">Untargeted quantitative multi-omics experience across transcriptomics, proteomics, metabolomics, and clinical (EMR/EHR) datasets.</p>
-  </li>
-  <li>
-    <p>High-throughput Analysis</p>
-    <p class="acc1">Experience developing high-throughput analysis pipelines using Snakemake and Nextflow for research and production environments.</p>
-  </li>
-  <li>
-    <p>Interactive Dashboard</p>
-    <p class="acc1">End-to-end development of automated data visualization solutions using React and modern front-end technologies.</p>
-  </li>
-</ul>
-<h3 id="sk-languages">Languages</h2>
-<ul class="sm:grid grid-cols-3 gap-x-2">
-  <li>
-    <p>Korean</p>
-    <p class="acc1">Native</p>
-  </li>
-  <li>
-    <p>English</p>
-    <p class="acc1">Full Professional Proficiency</p>
-  </li>
-  <li>
-    <p>Japanese</p>
-    <p class="acc1">Elementary Proficiency</p>
-  </li>
-</ul>
+---
+import { getCollection, getEntry } from 'astro:content';
+const entry = await getCollection('skills');
+if (!entry) { console.error(entry); }
+---
+{entry[0].data?.sections.map((section) => (
+  <><h3 id={section.id}>{section.title}</h3>
+  <ul class={section.title === 'Languages' ? 'sm:grid grid-cols-3 gap-x-2' : ''}>
+    {section.items.map((item) => (
+      <li>
+        <p>{item.title}</p>
+        <p class="acc1">{item.description}</p>
+      </li>
+    ))}
+  </ul>
+  </>
+))}
 
 <style>
   @reference "../styles/common.css";

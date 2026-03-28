@@ -1,7 +1,6 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import WorkItem from '../components/WorkItem.astro';
-import InlineAnchor from '../components/InlineAnchor.astro';
 
 const entry = await getCollection('work');
 if (!entry) { console.error(entry); }
