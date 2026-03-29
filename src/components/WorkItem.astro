@@ -12,10 +12,7 @@ const { company, address, dateStart, dateEnd = "Current", job, team, advisor } =
         dateEnd={dateEnd}
       />
     </div>
-    <p class="acc1">
-      {team}
-      {advisor && `(Advisor: ${advisor})`}
-    </p>
+    <p class="acc1">{team}{advisor && ` (Advisor: ${advisor})`}</p>
     <p class="acc2">{company}, {address}</p>
   </div>
   <slot />

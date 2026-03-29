@@ -69,7 +69,7 @@
 
   ul.workdesc a::after {
     content: url("../icons/launch.svg");
-    @apply align-middle;
+    @apply align-middle print:hidden;
   }
 
   @media print {

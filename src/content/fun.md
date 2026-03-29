@@ -35,7 +35,7 @@ sections:
         description: Half Marathon Course
         record: Net time 2:20:20 Gun time 2:21:10
         like: Beaultiful town view
-        curious: Who so hilly? (seriously)
+        curious: Why so hilly? (seriously)
 
       - title: The 2024 Seoul Shinmun Half Marathon
         year: 2024
