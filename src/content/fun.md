@@ -58,7 +58,7 @@ sections:
         day: 03
         address: Seoul, Korea
         description: 5km Course
-        dislike: Ugly T-shirt
+        dislike: "<span x-data='{ isHovered: false }' @mouseenter='isHovered = true' @mouseleave='isHovered = false' class='relative inline-block'><pre x-show='isHovered' x-transition:enter='transition opacity-100 duration-200' x-transition:leave='transition opacity-0 duration-150' class='absolute -top-4 left-4'><img class='max-w-none' src='/image/ugly_tshirt.webp'/></pre>Ugly T-shirt</span>"
 
       - title: 2023 Seoul Race
         year: 2023
