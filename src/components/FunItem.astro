@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+import Date from '../components/Date.astro';
+const { id, title, description, items, ...attrs } = Astro.props;
+---
+<h3 id={id} set:html={title}></h3>
+{description && (
+  <p class="text-zinc-600 dark:text-zinc-500 mb-el" set:html={description}></p>
+)}
+<ul {...attrs}>
+  {items?.map((item) => {
+    const date = item.day ? `${item.year}-${item.month}-${item.day}` : item.month ? `${item.year}-${item.month}` : item.year;
+    return (
+      <li class="sm:flex flex-row-reverse gap-x-4 justify-between mb-el">
+        <div class="flex-grow">
+          <div class="sm:flex flex-row gap-x-2 items-baseline">
+            <p>{item.title}</p>
+            <p class="acc1">{item.address}</p>
+          </div>
+          <div class="sm:flex flex-row gap-x-2 items-center">
+            <p class="acc2">{item.description}</p>
+            {item.record && (
+              <p class="text-sm text-amber-400">
+                <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-timer" />
+                <span>{item.record}</span>
+              </p>
+            )}
+          </div>
+          <ul class="flex gap-x-2">
+            {item.award && (
+              <li class="text-sm text-yellow-500 dark:text-yellow-600">
+                <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-emoji-events" />
+                <span set:html={item.award}></span>
+              </li>
+            )}
+            {item.like && (
+              <li class="text-sm text-blue-400 dark:text-blue-600">
+                <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-thumb-up" />
+                <span set:html={item.like}></span>
+              </li>
+            )}
+            {item.dislike && (
+              <li class="text-sm text-rose-400 dark:text-rose-600">
+                <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-thumb-down" />
+                <span set:html={item.dislike}></span>
+              </li>
+            )}
+            {item.curious && (
+              <li class="text-sm text-lime-600 dark:text-lime-800">
+                <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-contact-support" />
+                <span set:html={item.curious}></span>
+              </li>
+            )}
+          </ul>
+        </div>
+        {date && (
+          <Date dateStart={date} class="min-w-16 sm:text-right"/>
+        )}
+      </li>
+    )
+  })}
+</ul>

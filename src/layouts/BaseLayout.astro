@@ -18,7 +18,7 @@ const buildDate = new Date().toLocaleDateString('en-US', {
 });
 const buildYear = new Date().getFullYear();
 
-const { metatitle } = Astro.props;
+const { title } = Astro.props;
 ---
 <!--  ::::::::::  ##::    ::## :::::::::::: ##::   ::## -->
 <!-- :::::::::::: ##::    ::## :::::::::::: ###::  ::## -->
@@ -34,7 +34,7 @@ const { metatitle } = Astro.props;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
-  <title>{metatitle}</title>
+  <title>{title} | {yourName}</title>
   <script is:inline>
     const theme = (() => {
       if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
@@ -92,7 +92,7 @@ const { metatitle } = Astro.props;
 
   <ToC />
 
-  <main class="max-w-3xl mx-auto mt-24 px-8 pb-20 max-sm:pb-12 print:m-0 print:p-0">
+  <main class="max-w-3xl mx-auto mt-24 px-8 pb-16 max-sm:pb-12 print:m-0 print:p-0">
     <!-- slot content -->
     <slot />
   </main>

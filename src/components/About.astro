@@ -1,0 +1,19 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import ContactList from '../components/ContactList.astro';
+
+const entry = await getCollection('about');
+if (!entry) { console.error(entry); }
+const data = entry[0].data;
+---
+
+<section class="mt-sec">
+  <div set:html={entry[0].rendered.html}></div>
+  <ContactList
+    email={data.email}
+    github={data.github}
+    webpage={data.webpage}
+    orcid={data.orcid}
+    gscholar={data.gscholar}
+  />
+</section>

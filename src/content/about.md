@@ -1,5 +1,4 @@
 ---
-metatitle: "CV | Yourae Shin"
 email: "yshin062@ucr.edu"
 github: "llae27"
 webpage: "llae27.github.io"

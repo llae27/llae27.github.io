@@ -7,12 +7,49 @@ import { glob, file } from 'astro/loaders';
 // 3. Import Zod
 import { z } from 'astro/zod';
 
+const BaseItemSchema = z.object({
+  title: z.string(),
+  id: z.string().optional(),
+  description: z.string().optional(),
+});
+
+const BasicSectionSchema = BaseItemSchema.extend({
+  items: z.array(BaseItemSchema).optional(),
+});
+
+const DateItemSchema = z.object({
+  address: z.string(),
+  dateStart: z.string(),
+  dateEnd: z.string().optional(),
+});
+
+const FunItemSchema = BaseItemSchema.extend({
+  year: z.int().optional(),
+  month: z.int().optional(),
+  day: z.int().optional(),
+  address: z.string().optional(),
+  record: z.string().optional(),
+  like: z.string().optional(),
+  dislike: z.string().optional(),
+  curious: z.string().optional(),
+  award: z.string().optional(),
+});
+
+const FunSectionSchema = BaseItemSchema.extend({
+  id: z.string(),
+  items: z.array(FunItemSchema).optional(),
+});
+
+const PubSchema = z.object({
+  first: z.int().optional(),
+  award: z.string().optional(),
+});
+
 // 4. Define a `loader` and `schema` for each collection
 const about = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'about.md' }),
   schema: z.object({
-    metatitle: z.string(),
     email: z.string(),
     github: z.string().optional(),
     webpage: z.string().optional(),
@@ -22,19 +59,13 @@ const about = defineCollection({
 });
 
 const edu = defineCollection({
-  // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'edu.md' }),
-  schema: z.object({
-    title: z.string(),
-    id: z.string(),
-    items: z.array(z.object({
+  schema: BaseItemSchema.extend({
+    items: z.array(DateItemSchema.extend({
       school: z.string(),
       program: z.string(),
       dept: z.string(),
       advisor: z.string(),
-      address: z.string(),
-      dateStart: z.string(),
-      dateEnd: z.string().optional(),
       gpa: z.string(),
       gpaMajor: z.string(),
     })),
@@ -44,14 +75,10 @@ const edu = defineCollection({
 const publication = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'publication.md' }),
-  schema: z.object({
-    title: z.string(),
-    id: z.string(),
-    items: z.array(z.object({
+  schema: BaseItemSchema.extend({
+    items: z.array(PubSchema.extend({
       bibtex: z.string(),
       type: z.string(),
-      first: z.int().optional(),
-      award: z.string().optional(),
     })),
   }),
 });
@@ -61,10 +88,7 @@ const orcid = defineCollection({
   loader: glob({ base: './src/content', pattern: 'orcid.md' }),
   schema: z.object({
     showpreprint: z.boolean(),
-    override: z.record(z.string(), z.object({
-      first: z.int().optional(),
-      award: z.string().optional(),
-    })).optional(),
+    override: z.record(z.string(), PubSchema).optional(),
   }),
 });
 
@@ -72,23 +96,16 @@ const work = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'work.md' }),
   schema: z.object({
-    sections: z.array(z.object({
-      title: z.string(),
-      id: z.string(),
-      sections: z.array(z.object({
-        title: z.string(),
-        id: z.string(),
-        items: z.array(z.object({
+    sections: z.array(BaseItemSchema.extend({
+      sections: z.array(BaseItemSchema.extend({
+        items: z.array(DateItemSchema.extend({
           job: z.string(),
           team: z.string().optional(),
           advisor: z.string().optional(),
           company: z.string(),
-          address: z.string(),
-          dateStart: z.string(),
-          dateEnd: z.string(),
           description: z.array(z.string()).optional()
-        })),
-      })),
+        }))
+      }))
     })),
   }),
 });
@@ -97,15 +114,10 @@ const award = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'award.md' }),
   schema: z.object({
-    sections: z.array(z.object({
-      title: z.string(),
-      id: z.string(),
-      items: z.array(z.object({
+    sections: z.array(BaseItemSchema.extend({
+      items: z.array(DateItemSchema.extend({
         title: z.string(),
         inst: z.string(),
-        address: z.string(),
-        dateStart: z.string(),
-        dateEnd: z.string().optional(),
         description: z.string().optional()
       })),
     })),
@@ -116,23 +128,14 @@ const skills = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'skills.md' }),
   schema: z.object({
-    sections: z.array(z.object({
-      title: z.string(),
-      id: z.string(),
-      items: z.array(z.object({
-        title: z.string(),
-        description: z.string(),
-      })),
-    })),
+    sections: z.array(BasicSectionSchema),
   }),
 });
 
 const fun = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'fun.md' }),
-  schema: z.object({
-    title: z.string(),
-    id: z.string(),
+  schema: BaseItemSchema.extend({
     like: z.object({
       title: z.string(),
       items: z.array(z.string())
@@ -141,25 +144,17 @@ const fun = defineCollection({
       title: z.string(),
       items: z.array(z.string())
     }).optional(),
-    sections: z.array(z.object({
-      title: z.string(),
-      id: z.string(),
-      items: z.array(z.object({
-        title: z.string(),
-        year: z.int().optional(),
-        month: z.int().optional(),
-        day: z.int().optional(),
-        address: z.string().optional(),
-        record: z.string().optional(),
-        description: z.string(),
-        like: z.string().optional(),
-        dislike: z.string().optional(),
-        curious: z.string().optional(),
-        award: z.string().optional(),
-      })),
-    })).optional(),
+    sections: z.array(FunSectionSchema).optional(),
+  }),
+});
+
+const visit = defineCollection({
+  // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content', pattern: 'visit.md' }),
+  schema: BaseItemSchema.extend({
+    sections: z.array(FunSectionSchema).optional(),
   }),
 });
 
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { about, edu, publication, orcid, work, award, skills, fun };
+export const collections = { about, edu, publication, orcid, work, award, skills, fun, visit };
