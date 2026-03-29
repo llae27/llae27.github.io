@@ -61,20 +61,20 @@ const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.cont
     )}
     <p class="acc1" set:html={authors}></p>
     <div class="sm:flex flex-row items-center space-x-2">
-      <div class="flex flex-row items-center space-x-2">
-        <p class="acc2">{venue}</p>
-        <ul class="flex flex-row items-center space-x-2">
+      <div>
+        <p class="acc2 inline-flex self-center">{venue}</p>
+        <ul class="inline-flex self-center space-x-1">
           {externalIds?.doi && (
-            <li>
+            <li class="inline-flex self-center">
               <a href={`${externalIds.doi.url}`} target="_blank">
-                <Icon name="doi" />
+                <Icon class="inline-flex self-center" name="doi" />
               </a>
             </li>
           )}
           {externalIds?.pmid && (
-            <li>
+            <li class="inline-flex self-center">
               <a href={`${externalIds.pmid.url}`} target="_blank">
-                <Icon name="pubmed-square" />
+                <Icon class="inline-flex self-center" name="pubmed-square" />
               </a>
             </li>
           )}
@@ -89,17 +89,18 @@ const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.cont
                 }
               }"
               title="BibTex"
-              class="flex flex-row items-center space-x-1"
+              class="inline-flex self-center space-x-1"
             >
               <pre x-ref="bibContent" class="hidden">{bibtex}</pre>
               <a class="cursor-pointer" @click="copy()">
                 <Icon
                   x-show="!copied"
+                  class="inline-flex self-center"
                   name="ic:baseline-account-balance"
                 />
-                <Icon class="text-green-600" x-show="copied" name="ic:baseline-check-circle"/>
+                <Icon class="inline-flex self-center text-green-600" x-show="copied" name="ic:baseline-check-circle"/>
               </a>
-              <span class="text-green-600 text-sm" x-show="copied">Copied!</span>
+              <span class="inline-flex self-center text-green-600 text-sm" x-show="copied">Copied!</span>
             </li>
           )}
         </ul>
