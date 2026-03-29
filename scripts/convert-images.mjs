@@ -24,7 +24,7 @@ async function convertToWebp() {
     if (/\.(jpe?g|png|tiff)$/i.test(file)) {
       await sharp(inputPath)
         .resize({
-          width: 384, height: 384, withoutEnlargement: true
+          width: 256, height: 256, withoutEnlargement: true
         })
         .webp({ quality: 75 }) // 80 is the sweet spot for WebP
         .toFile(outputPath);

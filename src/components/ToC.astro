@@ -1,7 +1,7 @@
 ---
-
+import ScrollTopBtn from '../components/ScrollTopBtn.astro';
 ---
-<aside class="fixed hidden lg:flex flex-row items-center h-screen top-0 right-0 pointer-events-none">
+<aside class="fixed hidden lg:flex flex-col items-center justify-center h-screen top-0 right-0 pointer-events-none">
   <nav x-data="toc" class="group mr-12 pointer-events-auto">
     <ul class="space-y-1">
       <template x-for="heading in headings" :key="heading.id">
@@ -31,6 +31,9 @@
       </template>
     </ul>
   </nav>
+  <div class="fixed right-12 bottom-8 pointer-events-auto">
+    <ScrollTopBtn />
+  </div>
 </aside>
 
 <script>
