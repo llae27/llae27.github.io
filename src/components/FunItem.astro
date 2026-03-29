@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Date from '../components/Date.astro';
-const { id, title, description, items, ...attrs } = Astro.props;
+const { id, title, description, items, use_google_link, ...attrs } = Astro.props;
 ---
 <h3 id={id} set:html={title}></h3>
 {description && (
@@ -10,11 +10,17 @@ const { id, title, description, items, ...attrs } = Astro.props;
 <ul {...attrs}>
   {items?.map((item) => {
     const date = item.day ? `${item.year}-${item.month}-${item.day}` : item.month ? `${item.year}-${item.month}` : item.year;
+    const searchUrl = (use_google_link && item.address) ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ' ' + item.address )}` : '';
     return (
       <li class="sm:flex flex-row-reverse gap-x-4 justify-between mb-el">
         <div class="flex-grow">
           <div class="sm:flex flex-row gap-x-2 items-baseline">
+          {searchUrl && (
+            <a class="hover:underline" href={searchUrl} target="_blank"><p>{item.title}</p></a>
+          )}
+          {!searchUrl && (
             <p>{item.title}</p>
+          )}
             <p class="acc1">{item.address}</p>
           </div>
           <div class="sm:flex flex-row gap-x-2 items-center">
@@ -26,7 +32,7 @@ const { id, title, description, items, ...attrs } = Astro.props;
               </p>
             )}
           </div>
-          <ul class="flex gap-x-2">
+          <ul class="sm:flex gap-x-2">
             {item.award && (
               <li class="text-sm text-yellow-500 dark:text-yellow-600">
                 <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-emoji-events" />
