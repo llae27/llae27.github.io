@@ -30,5 +30,12 @@ if (!entry) { console.error(entry); }
       </div>
     )}
   </div>
-{entry[0].data.sections.map((section) => (<FunItem {...section} />))}
+  {entry[0].data.sections.map((section) => (<FunItem {...section} />))}
+  <h3>Still more?</h3>
+  <ul class="sm:grid grid-cols-2 gap-x-4">
+    <li class="mb-el">
+      <p>Visit Seoul</p>
+      <p class="acc1">If you plan to visit Seoul, <a class="inlineanchor" href="/visit">please check it out.</a></p>
+    </li>
+  </ul>
 </section>
