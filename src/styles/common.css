@@ -63,13 +63,17 @@
     @apply italic;
   }
 
-  ul.workdesc a {
-    @apply text-zinc-800 dark:text-zinc-300 print:text-inherit font-semibold print:font-normal hover:underline;
+  ul.workdesc a,
+  a.inlineanchor {
+    @apply text-zinc-800 dark:text-zinc-300 print:text-inherit font-semibold print:font-normal hover:underline dark:after:bg-zinc-300;
   }
 
-  ul.workdesc a::after {
-    content: url("../icons/launch.svg");
-    @apply align-middle print:hidden;
+  ul.workdesc a::after,
+  a.inlineanchor::after {
+    content: "";
+    mask: url("../icons/launch.svg") no-repeat center;
+    -webkit-mask: url("../icons/launch.svg") no-repeat center;
+    @apply inline-flex w-4 h-4 align-middle bg-zinc-800 print:hidden;
   }
 
   @media print {

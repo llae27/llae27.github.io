@@ -10,21 +10,21 @@ const { id, title, description, items, use_google_link, ...attrs } = Astro.props
 <ul {...attrs}>
   {items?.map((item) => {
     const date = item.day ? `${item.year}-${item.month}-${item.day}` : item.month ? `${item.year}-${item.month}` : item.year;
-    const searchUrl = (use_google_link && item.address) ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ' ' + item.address )}` : '';
+    const searchUrl = (use_google_link && id.slice(0, 5) === 'visit' && item.address) ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ' ' + item.address )}` : '';
     return (
       <li class="sm:flex flex-row-reverse gap-x-4 justify-between mb-el">
         <div class="flex-grow">
           <div class="sm:flex flex-row gap-x-2 items-baseline">
           {searchUrl && (
-            <a class="hover:underline" href={searchUrl} target="_blank"><p>{item.title}</p></a>
+            <a class="hover:underline" href={searchUrl} target="_blank"><p set:html={item.title}></p></a>
           )}
           {!searchUrl && (
-            <p>{item.title}</p>
+            <p set:html={item.title}></p>
           )}
             <p class="acc1">{item.address}</p>
           </div>
           <div class="sm:flex flex-row gap-x-2 items-center">
-            <p class="acc2">{item.description}</p>
+            <p class="acc2" set:html={item.description}></p>
             {item.record && (
               <p class="text-sm text-amber-400">
                 <Icon class="w-4 h-4 inline-flex self-center" name="ic:baseline-timer" />
