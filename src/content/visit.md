@@ -10,7 +10,7 @@ sections:
       - title: Koreans don't speak English
         description: I MEAN IT. It would be wise of you if you could learn few common tourist lines before you go.
       - title: Prepare multiple credit cards
-        description: Not debit cards. Korean payment systems is not that compatible with foreign cards. Prepare at least two different card providers (Master, VISA, etc.) if you can.
+        description: Not debit cards. Korean payment systems are not that compatible with foreign cards. Prepare at least two different card providers (Master, VISA, etc.) if you can.
       - title: Use public transportations
         description: It's never a good idea to grab taxi in Seoul. Please save your money, time, and energy. The only time I would recommend this is when you have too much to carry around and wouldn't mind being stuck in the traffic for extra 30 minutes.
       - title: Our cuisine is seafood based

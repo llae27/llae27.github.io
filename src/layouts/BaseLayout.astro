@@ -3,6 +3,7 @@ import "../styles/common.css";
 import ToC from '../components/ToC.astro';
 import ThemeBtn from '../components/ThemeBtn.astro';
 import PrintBtn from '../components/PrintBtn.astro';
+import ScrollTopBtn from '../components/ScrollTopBtn.astro';
 
 const nameFirst = import.meta.env.YOUR_NAME_FIRST;
 const nameLast = import.meta.env.YOUR_NAME_LAST;
@@ -91,6 +92,10 @@ const { title } = Astro.props;
   </nav>
 
   <ToC />
+
+  <div class="fixed right-8 lg:right-12 bottom-8 pointer-events-auto">
+    <ScrollTopBtn />
+  </div>
 
   <main class="max-w-3xl mx-auto mt-24 px-8 pb-16 max-sm:pb-12 print:m-0 print:p-0">
     <!-- slot content -->
