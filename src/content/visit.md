@@ -76,11 +76,11 @@ sections:
       - title: 반포한강공원
         address: 40 Sinbanpo-ro 11-gil, Seocho District, Seoul
         description: Please visit Han-gang public park at least once if you're visiting Seoul
-        like: Ride bikes, have instant ramyeon, order some delivery foods and have a picnic
+        like: Ride bikes, have instant ramyeon, order some delivery foods and have a picnic.
       - title: 신세계 백화점 강남점
         address: 176 Sinbanpo-ro, Seocho District, Seoul
         description: One of the largest department stores in Seoul
-        like: They have a nice collection of selected dessert stores at B1F
+        like: They have a nice collection of selected dessert stores on B1F
       - title: 산들해
         address: 287 Banpo-daero, Seocho District, Seoul (B1F)
         like: A nice lunch place to experience true Korean style dining
@@ -120,7 +120,7 @@ sections:
         curious: Don't expect any modern service
       - title: 🍰 메종엠오 Maison M'O
         address: 22 Bangbae-ro 26-gil, Seocho District, Seoul
-        description: All their cakes & madeleines are super good. If you want any cake, visit before 3 PM.
+        description: All their cakes & madeleines are super good. They always sell out fast. If you want any cake, visit before 3 PM.
         like: The best dessert place in Seoul since 2012
         curious: Be aware of limited opening hours
       - title: 🍰 율목커피 Yulmok Coffee
@@ -150,7 +150,7 @@ sections:
         like: The only thing that wouldn't change about this street.
       - title: 도수향
         address: 662-7 Sinsa-dong, Gangnam District, Seoul
-        description: You can have the fanciest 이북식 인절미 north Korean style rice cake in your lifetime.
+        description: You can have the finest 이북식 인절미 north Korean style rice cake in your lifetime.
         like: This is the ultimate place for rice cake. SOTA.
         curious: Reservation required strictly through phone call
       - title: 🍰 세시셀라 도산공원점
