@@ -19,7 +19,7 @@ sections:
         description: It's just so much better at finding an optimal path with all public transportations. I am not sure how accessible it is for foreigners, but please get it if possible. I've suffered enough with Naver map and can't even imagine how bad Google map would be.
   - title: 종로구 Jongno-gu
     id: visit-jongno
-    description: If you're not from Korea, you should never miss Jongno. Plenty of historical buildings and modern art experiences. This is where you can experience Seoul the most.
+    description: If you're not from Korea, you should never miss Jongno. Plenty of historical buildings and modern cultural experiences. This is where you can experience Seoul the most.
     items:
       - title: 경복궁 광화문
         address: 161 Sajik-ro, Jongno-gu, Seoul
