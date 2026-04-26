@@ -1,25 +1,25 @@
 ---
 title: Visit Seoul
 id: visit-seoul
-description: I lived in Seoul for almost my entire life. If you are planning to visit, I have few recommendations.
+description: I lived in Seoul for almost my entire life. If you are planning to visit, I have a few recommendations.
 sections:
   - title: ℹ️ General Advice
     id: before-visit
-    description: All location names are in Korean. Just copy-and-paste them into your map application. I bet it will give you better results than using poorly translated English version of their names.
+    description: All location names are in Korean. Just copy-and-paste them into your map application. I also put a Google map link to make it easier for you.
     items:
       - title: Koreans don't speak English
-        description: I MEAN IT. It would be wise of you if you could learn few common tourist lines before you go.
+        description: I MEAN IT. Please be prepared to use a translator at all times.
       - title: Prepare multiple credit cards
-        description: Not debit cards. Korean payment systems are not that compatible with foreign cards. Prepare at least two different card providers (Master, VISA, etc.) if you can.
+        description: Not debit cards. Korean payment systems are not very compatible with foreign debit cards. Prepare at least two different credit card providers (Master, VISA, etc.) if you can.
       - title: Use public transportations
-        description: It's never a good idea to grab taxi in Seoul. Please save your money, time, and energy. The only time I would recommend this is when you have too much to carry around and wouldn't mind being stuck in the traffic for extra 30 minutes.
+        description: It's not a good idea to take a taxi in Seoul. The only time I would recommend this is when you have too much to carry around and wouldn't mind being stuck in the traffic for extra 30 minutes.
       - title: Our cuisine is seafood based
-        description: If you're allergic to shrimp, please ask before you order. Literally any food may and will contain seafood based ingredients in it.
+        description: If you're allergic to shrimp, please inform the staff before you order. Literally any food may and will contain seafood based ingredients in it.
       - title: "Use <a class='inlineanchor' href='https://www.kakaocorp.com/page/service/service/KakaoMap?lang=en' target='_blank'>Kakao map</a> if possible"
-        description: It's just so much better at finding an optimal path with all public transportations. I am not sure how accessible it is for foreigners, but please get it if possible. I've suffered enough with Naver map and can't even imagine how bad Google map would be.
+        description: It's just so much better at finding an optimal path with all public transportations. I am not sure how accessible it is for foreigners, but please get it if possible. I don't recommend Naver map honestly (suffered enough with it).
   - title: 종로구 Jongno-gu
     id: visit-jongno
-    description: If you're not from Korea, you should never miss Jongno. Plenty of historical buildings and modern cultural experiences. This is where you can experience Seoul the most.
+    description: If you're not from Korea, you should never miss Jongno. Plenty of historical buildings with modern cultural experiences. This is where you can experience Seoul the most.
     items:
       - title: 경복궁 광화문
         address: 161 Sajik-ro, Jongno-gu, Seoul
@@ -56,7 +56,7 @@ sections:
       - title: 🍵 오설록 티하우스
         address: 30 Samcheong-ro, Jongno District, Seoul
         description: O'sulloc Tea House MMCA Branch
-        like: Convinient location if you're visiting MMCA
+        like: Convinient location if you're visiting MMCA. Also nice surrounding area!
       - title: 🥘 혜화도담 Hyehwa Dodam
         address: 16-6 Daemyeong 1-gil, Jongno District, Seoul
         like: A nice lunch place serveing Kimchijjim
