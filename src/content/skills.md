@@ -16,6 +16,4 @@ sections:
         description: "Native"
       - title: "English"
         description: "Full Professional Proficiency"
-      - title: "Japanese"
-        description: "Elementary Proficiency"
 ---

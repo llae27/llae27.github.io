@@ -1,19 +1,6 @@
 ---
 title: 😎 Still curious?
 id: hobby
-like:
-  title: I enjoy
-  items:
-    - Minimalistic web design
-    - Running and walking
-    - Watching movies
-    - Nice coffee and desserts 🍮
-dislike:
-  title: I don't like
-  items:
-    - Raining ☔️☔️☔️
-    - Movies longer than 120 minutes (with minor exceptions)
-    - Outdated web browsers
 sections:
   - title: Running Experience
     id: hobby-run
