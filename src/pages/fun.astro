@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import About from '../components/About.astro';
 import FunItem from '../components/FunItem.astro';
 
-const entry = await getCollection('visit');
+const entry = await getCollection('fun');
 if (!entry) { console.error(entry); }
 ---
 

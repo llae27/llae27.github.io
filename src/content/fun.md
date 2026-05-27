@@ -1,5 +1,5 @@
 ---
-title: 😎 Still curious?
+title: 😎 More about me
 id: hobby
 sections:
   - title: Running Experience

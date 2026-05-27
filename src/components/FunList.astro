@@ -1,38 +1,15 @@
 ---
 import { getCollection, getEntry } from 'astro:content';
 import FunItem from '../components/FunItem.astro';
-
-const entry = await getCollection('fun');
-if (!entry) { console.error(entry); }
 ---
 
 <section class="mt-sec print:hidden">
-<h2 id={entry[0].id} set:html={entry[0].data.title}></h2>
-  <div class="sm:grid grid-cols-2 gap-x-4">
-    {entry[0].data.like && (
-      <div class="mb-el">
-        <p class="font-semibold mb-space" set:html={entry[0].data.like.title}></p>
-        <ul class="list-disc ml-4 text-zinc-600 dark:text-zinc-500">
-        {entry[0].data.like.items.map((item) => (
-          <li set:html={item}></li>
-        ))}
-        </ul>
-      </div>
-    )}
-    {entry[0].data.dislike && (
-      <div class="mb-el">
-        <p class="font-semibold mb-space" set:html={entry[0].data.dislike.title}></p>
-        <ul class="list-disc ml-4 text-zinc-600 dark:text-zinc-500">
-        {entry[0].data.dislike.items.map((item) => (
-          <li set:html={item}></li>
-        ))}
-        </ul>
-      </div>
-    )}
-  </div>
-  {entry[0].data.sections.map((section) => (<FunItem {...section} />))}
-  <h3>Still more?</h3>
+<h2 id="more" set:html="Miscellaneous"></h2>
   <ul class="sm:grid grid-cols-2 gap-x-4">
+    <li class="mb-el">
+      <p>Running experience</p>
+      <p class="acc1">Review on <a class="inlineanchor" href="/fun">previous running events.</a></p>
+    </li>
     <li class="mb-el">
       <p>Visit Seoul</p>
       <p class="acc1">If you plan to visit Seoul, <a class="inlineanchor" href="/visit">please check it out.</a></p>
