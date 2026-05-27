@@ -7,4 +7,4 @@ gscholar: "fpwim2IAAAAJ"
 ---
 
 <h1 class="print:text-center">Yourae Shin</h1>
-<p class="print:text-center">I am a bioinformatics researcher focusing on LC-MS based untargeted proteomics/metabolomics. I have extensive experience in both bioinformatics analysis focused on specific biological subjects, mainly human diseases, and software development to facilitate large scale data analysis.</p>
+<p class="print:text-center">I am a bioinformatics researcher focusing on LC-MS based untargeted proteomics/metabolomics. I have extensive experience in multi-omics analysis on various biological subjects including human diseases, plants, and single cell. Currently I am focusing on software development that facilitates large scale analysis of mass spectrometry data.</p>

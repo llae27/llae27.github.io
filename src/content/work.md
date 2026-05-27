@@ -62,6 +62,13 @@ sections:
       - title: "Teaching Assistant"
         id: "teach-ta"
         items:
+          - job: "Intermediate Data Structures and Algorithms (CS141)"
+            team: "Department of Computer Science and Engineering"
+            company: "University of California, Riverside"
+            address: "Riverside, California"
+            dateStart: "2026-03-30"
+            dateEnd: "2026-06-13"
+            url: "https://www.cs.ucr.edu/~mingxunw/courses/cs141/sp26/"
           - job: "Design and Analysis of Algorithms (CS218)"
             team: "Department of Computer Science and Engineering"
             company: "University of California, Riverside"
