@@ -22,7 +22,7 @@ const { school, address, dateStart, dateEnd = "Current", program, dept, advisor,
       <p class="acc2 school">{school}, {address}</p>
     </div>
     {(gpa || gpaMajor) && (
-      <p class="acc2">{gpa && `Overall GPA: ${gpa}`}{(gpa && gpaMajor) && '; '}{gpaMajor && `Major GPA: ${gpaMajor}`}</p>
+      <p class="acc2 print:hidden">{gpa && `Overall GPA: ${gpa}`}{(gpa && gpaMajor) && '; '}{gpaMajor && `Major GPA: ${gpaMajor}`}</p>
     )}
   </div>
 </li>

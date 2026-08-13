@@ -43,6 +43,7 @@ const FunSectionSchema = BaseItemSchema.extend({
 const PubSchema = z.object({
   first: z.int().optional(),
   award: z.string().optional(),
+  hide: z.boolean().optional(),
 });
 
 // 4. Define a `loader` and `schema` for each collection

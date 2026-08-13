@@ -49,6 +49,9 @@ const publications = await Promise.all(
     if (!work) return null;
 
     const putCode = work['put-code'];
+    // hide?
+    if (override?.[putCode]?.hide) return null;
+
     // get links
     const externalIds = work['external-ids']?.['external-id'] || [];
     const reducedIds = externalIds.reduce((acc, id) => {
@@ -94,6 +97,7 @@ const publications = await Promise.all(
 <h3 id="pub-journal">Journal</h3>
 <ul>
   {publications.map((pubItem) => {
+    if (pubItem == null) return;
     if (pubItem.type == "preprint") return;
     return (
       <PubItem
@@ -107,6 +111,7 @@ const publications = await Promise.all(
   <><h3 id="pub-preprint">Preprint</h3>
   <ul>
     {publications.map((pubItem) => {
+      if (pubItem == null) return;
       if (pubItem.type != "preprint") return;
       return (
         <PubItem

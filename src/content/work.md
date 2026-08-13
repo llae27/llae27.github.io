@@ -13,9 +13,9 @@ sections:
             dateStart: "2022-06-27"
             dateEnd: "2024-06-30"
             description: 
-              - "Led diagnostic biomarker discovery based on systematic analysis of untargeted plasma proteome profiles in cholangiocarcinoma and prostate cancer."
-              - "Led single-cell level untargeted proteomics analysis on HeLa cell lysate for single-cell proteomics analysis workflow standardization."
-              - "Automated untargeted proteomics analysis and developed visualization platform for <a href='https://www.bertis.com/down/[Bertis]%20PASS%20Brochure_2403.pdf' target='_blank'>commercial proteomics solution service</a>."
+              - "Led diagnostic biomarker discovery based on untargeted plasma proteome in cholangiocarcinoma and prostate cancer."
+              - "Led single-cell untargeted proteomics analysis workflow standardization on HeLa cell lysate."
+              - "Developed automated proteomics analysis and visualization platform for <a href='https://www.bertis.com/down/[Bertis]%20PASS%20Brochure_2403.pdf' target='_blank'>commercial proteomics solution services</a>."
       
       - title: "Internships"
         id: "work-intern"
@@ -37,7 +37,7 @@ sections:
             dateStart: "2019-05-01"
             dateEnd: "2019-12-30"
             description:
-              - "Led transcriptomic analysis and biological pathway enrichment analysis to discover novel upstream regulator in Arabidopsis thaliana vernalization model (Jeong, G., et al. 2026)."
+              - "Led transcriptomics and biological pathway enrichment analysis to discover novel upstream regulators in Arabidopsis thaliana vernalization model (Jeong, G., et al. 2026)."
           - job: "Undergraduate Student Researcher"
             team: "Veterinary Anatomy Lab"
             advisor: "Junpei Kimura"

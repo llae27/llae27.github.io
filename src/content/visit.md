@@ -8,7 +8,7 @@ sections:
     description: All location names are in Korean. Just copy-and-paste them into your map application. I also put a Google map link to make it easier for you.
     items:
       - title: Koreans don't speak English
-        description: I MEAN IT. Please be prepared to use a translator at all times.
+        description: I MEAN IT. Be prepared to use translators. If you want to learn Korean before your trip, I recommend learning some phrases you can use at restaurants. It's where you have the least likelihood of finding someone who speaks English.
       - title: Prepare multiple credit cards
         description: Not debit cards. Korean payment systems are not very compatible with foreign debit cards. Prepare at least two different credit card providers (Master, VISA, etc.) if you can.
       - title: Use public transportations
