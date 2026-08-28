@@ -50,7 +50,10 @@ const publications = await Promise.all(
 
     const putCode = work['put-code'];
     // hide?
-    if (override?.[putCode]?.hide) return null;
+    if (override?.[putCode]?.hide) {
+      console.log(work);
+      return null;
+    };
 
     // get links
     const externalIds = work['external-ids']?.['external-id'] || [];
