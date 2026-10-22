@@ -50,8 +50,9 @@ const publications = await Promise.all(
 
     const putCode = work['put-code'];
     // hide?
+    console.log(work);
+
     if (override?.[putCode]?.hide) {
-      console.log(work);
       return null;
     };
 
@@ -92,6 +93,7 @@ const publications = await Promise.all(
       bibtex: bibtex,
       award: override?.[putCode]?.award,
       first: override?.[putCode]?.first || 1,
+      venue: override?.[putCode]?.venue,
     };
   }).sort((a, b) => b.year - a.year)
 ); // Sort by newest first

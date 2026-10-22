@@ -3,6 +3,11 @@ sections:
   - title: "Awards and Scholarships"
     id: "award"
     items:
+      - title: "ASMS Asilomar Travel Stipend"
+        inst: "American Society for Mass Spectrometry"
+        address: "Santa Fe, New Mexico"
+        dateStart: "2026-10-09"
+        description: "Free registration and travel expenses ($750)"
       - title: "Dean's Distinguished Award"
         inst: "University of California, Riverside"
         address: "Riverside, California"

@@ -6,16 +6,17 @@ if (!entry) { console.error(entry); }
 <section class="mt-sec">
   <h2 id="skills">Skills</h2>
   {entry[0].data?.sections.map((section) => (
-    <><h3 id={section.id}>{section.title}</h3>
-    <ul class={section.title === 'Languages' ? 'sm:grid grid-cols-3 gap-x-4' : ''}>
-      {section.items.map((item) => (
-        <li>
-          <p>{item.title}</p>
-          <p class="acc1">{item.description}</p>
-        </li>
-      ))}
-    </ul>
-    </>
+    <div class="break-inside-avoid-page">
+      <h3 id={section.id}>{section.title}</h3>
+      <ul class={section.title === 'Languages' ? 'sm:grid grid-cols-3 gap-x-4' : ''}>
+        {section.items.map((item) => (
+          <li class={section.title !== 'Languages' ? 'print:grid grid-cols-4 gap-x-2' : ''}>
+            <p class="print:inline">{item.title}</p>
+            <p class="acc1 print:inline print:col-start-2 print:col-end-5">{item.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   ))}
 </section>
 

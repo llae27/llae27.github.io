@@ -46,11 +46,11 @@
   }
 
   h3 {
-    @apply text-lg print:text-base font-semibold text-zinc-800 dark:text-zinc-300 print:text-zinc-800 mb-el;
+    @apply text-lg print:text-sm font-semibold text-zinc-800 dark:text-zinc-300 print:text-zinc-800 mb-el;
   }
 
   p {
-    @apply print:text-sm print:leading-4;
+    @apply print:text-sm;
   }
 
   p.title {}
@@ -86,16 +86,16 @@
     }
 
     main {
-      @apply font-serif text-zinc-900 leading-tight;
-      --margin-sec: calc(var(--spacing) * 4);
-      --margin-ls: calc(var(--spacing) * 2);
-      --margin-el: calc(var(--spacing) * 2);
-      --margin-space: calc(var(--spacing) * 1);
+      @apply font-serif text-zinc-900;
+      --margin-sec: calc(var(--spacing) * 1);
+      --margin-ls: calc(var(--spacing) * 1);
+      --margin-el: calc(var(--spacing) * 0);
+      --margin-space: calc(var(--spacing) * 0);
       --padding-ls: calc(var(--spacing) * 1);
     }
 
     @page {
-      @apply mb-16 align-top;
+      @apply mt-6 mb-10 align-top;
 
       @bottom-center {
         @apply font-serif text-sm;

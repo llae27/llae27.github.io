@@ -21,6 +21,7 @@ const DateItemSchema = z.object({
   address: z.string(),
   dateStart: z.string(),
   dateEnd: z.string().optional(),
+  noprint: z.boolean().optional(),
 });
 
 const FunItemSchema = BaseItemSchema.extend({
@@ -43,6 +44,7 @@ const FunSectionSchema = BaseItemSchema.extend({
 const PubSchema = z.object({
   first: z.int().optional(),
   award: z.string().optional(),
+  venue: z.string().optional(),
   hide: z.boolean().optional(),
 });
 
@@ -111,6 +113,38 @@ const work = defineCollection({
   }),
 });
 
+const workResearch = defineCollection({
+  // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content', pattern: 'work-research.md' }),
+  schema: z.object({
+    sections: z.array(BaseItemSchema.extend({
+      items: z.array(DateItemSchema.extend({
+        job: z.string(),
+        team: z.string().optional(),
+        advisor: z.string().optional(),
+        company: z.string(),
+        description: z.array(z.string()).optional()
+      }))
+    })),
+  }),
+});
+
+const workTeaching = defineCollection({
+  // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
+  loader: glob({ base: './src/content', pattern: 'work-teaching.md' }),
+  schema: z.object({
+    sections: z.array(BaseItemSchema.extend({
+      items: z.array(DateItemSchema.extend({
+        job: z.string(),
+        team: z.string().optional(),
+        advisor: z.string().optional(),
+        company: z.string(),
+        description: z.array(z.string()).optional()
+      }))
+    })),
+  }),
+});
+
 const award = defineCollection({
   // loader: glob({ base: './src/content', pattern: '**/*.{md,mdx}' }),
   loader: glob({ base: './src/content', pattern: 'award.md' }),
@@ -158,4 +192,4 @@ const visit = defineCollection({
 });
 
 // 5. Export a single `collections` object to register your collection(s)
-export const collections = { about, edu, publication, orcid, work, award, skills, fun, visit };
+export const collections = { about, edu, publication, orcid, work, workResearch, workTeaching, award, skills, fun, visit };

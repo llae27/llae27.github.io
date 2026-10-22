@@ -4,7 +4,7 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
 ---
 <div class="mt-el">
   <ul class="sm:grid sm:grid-flow-col sm:grid-rows-3 gap-x-2 print:flex print:flex-row print:justify-center">
-    <li class="no-print">
+    <li>
       <Icon title="It's sunny here" name="ic:baseline-wb-sunny" class="text-amber-400" />
       <span>Riverside, California</span>
     </li>
@@ -15,7 +15,7 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
       </li>
     )}
     {webpage && (
-      <li>
+      <li class="no-print">
         <Icon name="ic:baseline-link" />
         <a href=`https://${webpage}`>{webpage}</a>
       </li>
@@ -23,7 +23,7 @@ const { email, github, webpage, orcid, gscholar } = Astro.props;
     {github && (
       <li>
         <Icon name="octicon:mark-github-24" />
-        <a href=`https://github.com/${github}` target="_blank">@{github}</a>
+        <a href=`https://github.com/${github}` target="_blank">{github}</a>
       </li>
     )}
     {gscholar && (

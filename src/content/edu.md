@@ -5,6 +5,7 @@ items:
   - school: "University of California, Riverside"
     address: "Riverside, California"
     dateStart: "2024-09-20"
+    dateEnd: "Expected 2029"
     program: "Doctor of Philosophy in Computer Science"
     dept: "Department of Computer Science and Engineering"
     advisor: "Mingxun Wang"

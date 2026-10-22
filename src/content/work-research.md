@@ -1,0 +1,67 @@
+---
+title: "Research Experience"
+id: "work"
+sections:
+  - title: "Professional"
+    id: "work-prof"
+    items:
+      - job: "Assistant Research Engineer"
+        team: "Bioinformatics Team"
+        company: "Biomarker Research Institute (BRI), Bertis"
+        address: "Gyeonggi-do, Korea"
+        dateStart: "2022-06-27"
+        dateEnd: "2024-06-30"
+        description: 
+          - "Led diagnostic biomarker discovery based on untargeted plasma proteome in cholangiocarcinoma and prostate cancer."
+          - "Led single-cell untargeted proteomics analysis workflow standardization on HeLa cell lysate."
+          - "Developed automated proteomics analysis and visualization platform for <a href='https://www.bertis.com/down/[Bertis]%20PASS%20Brochure_2403.pdf' target='_blank'>commercial proteomics solution services</a>."
+  
+  - title: "Academic"
+    id: "work-intern"
+    items:
+      - job: "Graduate Student Researcher"
+        team: "Wang Bioinformatics Lab"
+        advisor: "Mingxun Wang"
+        company: "University of California, Riverside"
+        address: "Riverside, California"
+        dateStart: "2024-09-20"
+        description:
+          - "Built an AI agent-driven evaluation harness to automatically benchmark analysis software across 50+ public datasets."
+          - "Led development of ultra-fast feature finding software for repository-scale (5000+ datasets) untargeted metabolomics analysis (Shin et al. 2026)."
+      - job: "Graduate Student Researcher"
+        team: "Division of Clinical Bioinformatics"
+        advisor: "Kwangsoo Kim"
+        company: "Seoul National University Hospital"
+        address: "Seoul, Korea"
+        dateStart: "2020-05-01"
+        dateEnd: "2021-05-30"
+        description:
+          - "Led statistical analysis for longitudinal HbA1c prediction in type II diabetes cohort (n=55,602) based on electronic medical records (EMR) collected at SNUH from 2004 to 2020."
+      - job: "Undergraduate Student Researcher"
+        team: "Systems Biology and Medicine (SBM) Lab"
+        advisor: "Daehee Hwang"
+        company: "Seoul National University"
+        address: "Seoul, Korea"
+        dateStart: "2019-05-01"
+        dateEnd: "2019-12-30"
+        description:
+          - "Led transcriptomics and biological pathway enrichment analysis to discover novel upstream regulators in Arabidopsis thaliana vernalization model (Jeong et al. 2026)."
+      - job: "Undergraduate Student Researcher"
+        team: "Veterinary Anatomy Lab"
+        advisor: "Junpei Kimura"
+        company: "Seoul National University"
+        address: "Seoul, Korea"
+        dateStart: "2019-07-01"
+        dateEnd: "2019-08-31"
+        description:
+          - "X-ray image processing for the 3D visualization of bat inner ear bone structures."
+      - job: "Undergraduate Student Researcher"
+        team: "Neurophysiology Lab"
+        advisor: "Sukwoo Choi"
+        company: "Seoul National University"
+        address: "Seoul, Korea"
+        dateStart: "2018-07-01"
+        dateEnd: "2018-08-31"
+        description:
+          - "Practiced experimental skills including perfusion, cryosection, and immunostaining in rodent model."
+---

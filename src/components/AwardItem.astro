@@ -2,9 +2,9 @@
 import Date from '../components/Date.astro';
 const { title, inst, address, description, dateStart, dateEnd } = Astro.props;
 ---
-<li class="mb-el">
+<li class="mb-el break-inside-avoid-page">
   <div class="sm:flex sm:flex-row items-start justify-between space-x-2">
-    <p>{title}</p>
+    <p class="print:font-semibold">{title}</p>
     <Date
       dateStart={dateStart}
       dateEnd={dateEnd}

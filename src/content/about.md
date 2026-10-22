@@ -1,10 +1,10 @@
 ---
 email: "yshin062@ucr.edu"
-github: "llae27"
+github: "github.com/llae27"
 webpage: "llae27.github.io"
 orcid: "0000-0002-3274-726X"
 gscholar: "fpwim2IAAAAJ"
 ---
 
 <h1 class="print:text-center">Yourae Shin</h1>
-<p class="print:hidden">I am a bioinformatics researcher focusing on LC-MS based untargeted proteomics/metabolomics. I have extensive experience in multi-omics analysis on various biological subjects including human diseases, plants, and single cell. Currently I am focusing on software development that facilitates large scale analysis of mass spectrometry data.</p>
+<p class="print:text-center">Bioinformatics researcher specializing in LC-MS untargeted proteomics/metabolomics, with extensive experience in multi-omics analysis on human diseases, plants, and single cell. Currently focused on scalable analysis software development.</p>

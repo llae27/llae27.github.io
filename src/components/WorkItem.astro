@@ -1,12 +1,12 @@
 ---
 import Date from '../components/Date.astro';
-const { company, address, dateStart, dateEnd = "Current", job, team, advisor } = Astro.props;
+const { company, address, dateStart, dateEnd = "Present", job, team, advisor, noprint = false } = Astro.props;
 ---
 
-<li class="mb-el">
-  <div>
+<li class={ noprint ? "mb-el print:hidden" : "mb-el"}>
+  <div class="break-inside-avoid-page">
     <div class="sm:flex sm:flex-row items-start justify-between">
-      <p>{job}</p>
+      <p class="print:font-semibold">{job}</p>
       <Date
         dateStart={dateStart}
         dateEnd={dateEnd}

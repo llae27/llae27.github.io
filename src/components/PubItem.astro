@@ -1,9 +1,27 @@
 ---
 import { Icon } from 'astro-icon/components';
 import type { HTMLAttributes } from 'astro/types';
-import { Cite } from '@citation-js/core';
+import { Cite, plugins } from '@citation-js/core';
 import '@citation-js/plugin-bibtex';
 import '@citation-js/plugin-csl';
+
+// add NLM styling
+const nlmSource = 'https://raw.githubusercontent.com/citation-style-language/styles/master/nlm-citation-sequence.csl';
+const response = await fetch(nlmSource);
+if (!response.ok) {
+  throw new Error('Failed to load NLM CSL style');
+}
+const nlmStyle = await response.text();
+const config = plugins.config.get('@csl');
+if (config.styles?.add) {
+  config.styles.add('nlm', nlmStyle);
+} else if (config.templates?.add) {
+  config.templates.add('nlm', nlmStyle);
+} else {
+  throw new Error(
+    'Cannot register NLM style. Check your Citation.js versions.'
+  );
+}
 
 interface Props extends HTMLAttributes<'p'> {
   year: string;
@@ -14,23 +32,25 @@ interface Props extends HTMLAttributes<'p'> {
 const nameFirst = import.meta.env.YOUR_NAME_FIRST;
 const nameLast = import.meta.env.YOUR_NAME_LAST;
 const yourName = `${nameFirst} ${nameLast}`;
-const yourNameRegex = new RegExp(`(${nameLast}, ${nameFirst.slice(0,1)}\\.|${nameFirst.slice(0,1)}\\. ${nameLast})`, 'g');
+const yourNameRegex = new RegExp(`(${nameLast}, ${nameFirst.slice(0,1)}\\.|${nameFirst.slice(0,1)}\\. ${nameLast}|${nameLast} ${nameFirst.slice(0,1)})`, 'g');
 
 function formatApa (cite, first = 1) {
   // Output as APA Style HTML
   let count = 0;
   const citeApa = cite.format('bibliography', {
-    template: 'apa',
-    format: 'html',
+    template: 'nlm',
+    format: 'text',
     lang: 'en-US'
-  }).replace(/\., /g, (match) => {
+  }).replace(/^\s*\d+\.\s*/gm, ''
+  ).replace(/, /g, (match) => {
     count++;
-    return count <= first ? ".*, " : match;
-  }).replace(yourNameRegex, `<strong>$1</strong>`);
+    return count <= first ? "*, " : match;
+  }).replace(yourNameRegex, `<strong>$1</strong>`)
+  .replace(' [Internet]', '. bioRxiv');
   return citeApa
 }
 
-const { title, journal, year, month, day, address, url, externalIds, type, bibtex, award, first = 1 } = Astro.props;
+const { title, journal, year, month, day, address, url, externalIds, type, bibtex, award, first = 1, venue } = Astro.props;
 
 const cite = new Cite(bibtex.replace(/\s+/g, ' ').trim());
 const citeApa = formatApa(cite, first);
@@ -46,7 +66,7 @@ const authors = cite.data[0].author.map((a, idx) => {
   else return `${name}${isFirst}`;
 }).join(', ');
 
-const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.container-title || `${cite.data?.[0]?.publisher}, ${cite.data?.[0]?.['publisher-place']} (${type})` || '';
+const venueText = venue ? venue : type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.container-title || `${cite.data?.[0]?.publisher}, ${cite.data?.[0]?.['publisher-place']}` || '';
 ---
 
 <li class="sm:flex sm:flex-row-reverse items-start justify-between gap-x-4 mb-el print:list-item print:ml-4 print:mb-space">
@@ -62,7 +82,7 @@ const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.cont
     <p class="acc1" set:html={authors}></p>
     <div class="sm:flex flex-row items-center space-x-2">
       <div>
-        <p class="acc2 inline-flex self-center">{venue}</p>
+        <p class="acc2 inline-flex self-center">{venueText}</p>
         <ul class="inline-flex self-center space-x-1">
           {externalIds?.doi && (
             <li class="inline-flex self-center">
@@ -103,18 +123,18 @@ const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.cont
               <span class="inline-flex self-center text-green-600 text-sm" x-show="copied">Copied!</span>
             </li>
           )}
+          {award && (
+            <li class="award">
+              <Icon name="ic:baseline-emoji-events" />
+              <span>{award}</span>
+            </li>
+          )}
         </ul>
       </div>
-      {award && (
-        <div class="award">
-          <Icon name="ic:baseline-emoji-events" />
-          <span>{award}</span>
-        </div>
-      )}
     </div>
   </div>
   <p title={date} class="acc1 leading-[1.625rem] print:hidden">{dateYear}</p>
-  <div class="text-sm hidden print:block" set:html={citeApa}></div>
+  <div class="text-sm hidden hyphens-manual print:block" set:html={citeApa}></div>
 </li>
 
 <style>
@@ -124,8 +144,8 @@ const venue = type === 'preprint' ? 'Preprint' : journal || cite.data?.[0]?.cont
     svg {
       @apply w-4 h-4 text-zinc-600 dark:text-zinc-500 hover:text-zinc-900 hover:dark:text-zinc-200;
     }
-    div.award {@apply flex flex-row items-center space-x-1;}
-    div.award > svg {@apply text-yellow-500 dark:text-yellow-600;}
-    div.award > span {@apply text-sm text-yellow-500 dark:text-yellow-600;}
+    .award {@apply flex flex-row items-center space-x-1;}
+    .award > svg {@apply text-yellow-500 dark:text-yellow-600;}
+    .award > span {@apply text-sm text-yellow-500 dark:text-yellow-600;}
   }
 </style>

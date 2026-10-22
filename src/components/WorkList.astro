@@ -2,38 +2,71 @@
 import { getCollection, getEntry } from 'astro:content';
 import WorkItem from '../components/WorkItem.astro';
 
-const entry = await getCollection('work');
+const entry = await getCollection('workResearch');
+const entry2 = await getCollection('workTeaching');
 if (!entry) { console.error(entry); }
+if (!entry2) { console.error(entry2); }
 ---
-{entry[0]?.data?.sections?.map((section) => (
-  <section class="mt-sec">
-    <h2 id={section.id}>{section.title}</h2>
-    {section.sections?.map((subsection) => (
-      <h3 id={subsection.id}>{subsection.title}</h3>
-      <ul>
-      {subsection.items.map((item) => (
-        <WorkItem
-          job={item.job}
-          team={item.team}
-          advisor={item.advisor}
-          company={item.company}
-          address={item.address}
-          dateStart={item.dateStart}
-          dateEnd={item.dateEnd}
-        >
-        {item.description && (
-          <ul class="workdesc">
-            {item.description.map((d) => (
-              <li><p set:html={d}></p></li>
-            ))}
-          </ul>
-        )}
-        </WorkItem>
-      ))}
-      </ul>
+<section class="mt-sec">
+  <h2 id="work">Research Experience</h2>
+  <ul>
+    {entry[0]?.data?.sections?.map((section) => (
+      <li>
+        <h3 id={section.id}>{section.title}</h3>
+        {section.items.map((item) => (
+          <WorkItem
+            job={item.job}
+            team={item.team}
+            advisor={item.advisor}
+            company={item.company}
+            address={item.address}
+            dateStart={item.dateStart}
+            dateEnd={item.dateEnd}
+            noprint={item.noprint}
+          >
+          {item.description && (
+            <ul class="workdesc">
+              {item.description.map((d) => (
+                <li><p set:html={d}></p></li>
+              ))}
+            </ul>
+          )}
+          </WorkItem>
+        ))}
+      </li>
     ))}
-  </section>
-))}
+  </ul>
+</section>
+
+<section class="mt-sec">
+  <h2 id="teach-ta">Teaching Experience</h2>
+  <ul>
+    {entry2[0]?.data?.sections?.map((section) => (
+      <li>
+        {section.items.map((item) => (
+          <WorkItem
+            job={item.job}
+            team={item.team}
+            advisor={item.advisor}
+            company={item.company}
+            address={item.address}
+            dateStart={item.dateStart}
+            dateEnd={item.dateEnd}
+            noprint={item.noprint}
+          >
+          {item.description && (
+            <ul class="workdesc">
+              {item.description.map((d) => (
+                <li><p set:html={d}></p></li>
+              ))}
+            </ul>
+          )}
+          </WorkItem>
+        ))}
+      </li>
+    ))}
+  </ul>
+</section>
 
 <style>
   @reference "../styles/common.css";
